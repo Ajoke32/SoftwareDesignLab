@@ -8,55 +8,59 @@ namespace TicTocApp.classes
 {
     public class Game
     {
-        private Player[] players = { new Player() { Id = 1, Name = "Player 1" }, new Player() { Id = 2, Name = "Player 1" } };
-       
-        public int[,] combinations = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 1, 4, 7 }, { 2, 5, 8 }, { 3, 6, 9 }, { 1, 5, 9 }, { 3, 5, 7 } };
+        private Player[] players = { new Player() { Id = 1, Name = "Player 1" }, new Player() { Id = 2, Name = "Player 2" } };
+        private Grid grid= new Grid();
+        public int[][] combinations = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 },
+            new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 }, new int[] { 3, 6, 9 }, new int[] { 1, 5, 9 }, new int[] { 3, 5, 7 } };
+
         private Queue<int> checkedPos = new Queue<int>();
-        public int currentPlayer = 0;
+        public Player currentPlayer = null;
         public void Start()
         {
-            Console.WriteLine("Let's play Tic Tac Toe\n");
-            Console.WriteLine($"{players[0].Name}: X");
-            Console.WriteLine($"{players[1].Name}: O");
-            currentPlayer = players[0].Id;
-            Console.WriteLine($"Player {currentPlayer} turn");
+            grid.Draw();
+            Console.WriteLine("\nLet's play Tic Tac Toe\n");
+            players[0].Sign = 'X';
+            players[1].Sign = 'O';
+            Console.WriteLine($"{players[0].Name}: {players[0].Sign}");
+            Console.WriteLine($"{players[1].Name}: {players[1].Sign}");
+            currentPlayer = players[0];
+            Console.WriteLine($"\nPlayer {currentPlayer.Name} turn");
         }
         public bool Move(int position, int playerId)
         {
-           
-            if (checkedPos.Contains(position)||position>9)
+
+            if (checkedPos.Contains(position) || position > 9)
             {
                 Console.WriteLine("Move not accepted, Enter valid number!");
                 return false;
             }
             checkedPos.Enqueue(position);
-            var player = players.FirstOrDefault( p => p.Id == playerId );
-            player.Moves.Push(position);
+            var player = players.FirstOrDefault(p => p.Id == playerId);
+            player.Moves.Add(position, true);
+            grid.Draw(position,currentPlayer.Sign);
             return CheckWin(playerId);
         }
         public bool CheckWin(int playerId)
         {
             var player = players.FirstOrDefault(p => p.Id == playerId);
-            if (player==null)
+            if (player == null)
             {
                 return false;
             }
-            for (int i = 0; i < 8; i++)
+            
+            foreach (var item in combinations)
             {
-                int count = 0;
-                for (int j = 0; j < 3; j++)
+                var result = Array.FindAll(item, i => player.Moves.ContainsKey(i)==true);
+                if (result.Length == 3)
                 {
-                    if (player.Moves.Contains(combinations[i, j]))
-                    {
-                        count++;
-                    }
-                }
-                if (count == 3)
-                {
-                    Console.WriteLine($"Player {currentPlayer} win");
+                    Console.WriteLine($"\nWinner player {currentPlayer.Name}");
                     return true;
                 }
-                count = 0;
+                if (checkedPos.Count == 9 && result.Length != 3)
+                {
+                    Console.WriteLine($"\nDraw!");
+                    return true;
+                }
             }
 
             ChangeMoves(playerId);
@@ -66,21 +70,13 @@ namespace TicTocApp.classes
 
         private int ChangeMoves(int id)
         {
-            var player = players.FirstOrDefault(p => p.Id == id);
-           
+            var player = players.FirstOrDefault(p => p.Id != id);
             if (player == null)
             {
                 return 0;
             }
-            foreach (var item in players)
-            {
-                if (item.Id != player.Id)
-                {
-                    currentPlayer = item.Id;
-                }
-            }
-
-            Console.WriteLine($"Player {currentPlayer} turn");
+            currentPlayer = player;
+            Console.WriteLine($"\n{currentPlayer.Name} turn");
             return player.Id;
         }
         public void ChangePlayers()

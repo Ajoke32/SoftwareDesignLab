@@ -10,13 +10,14 @@ namespace TicTocApp.classes
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public Stack<int> Moves { get; set; } = new Stack<int>();
 
+        public Dictionary<int,bool> Moves = new Dictionary<int,bool>();
+        public char Sign { get; set; }
         public void TestData()
         { 
             for(int i=1;i<=2;i++)
             {
-                Moves.Push(i);
+                Moves.Add(i, false);
             }
         }  
         
