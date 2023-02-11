@@ -9,7 +9,7 @@ namespace TicTocApp.classes
     public class Grid
     {
 
-        private char[] grid = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        public char[] grid { get; set; } = { '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         public void Draw(int position = 0, char playerSign = 'n')
         {
             Console.Clear();

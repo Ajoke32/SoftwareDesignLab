@@ -1,0 +1,38 @@
+{
+  "players": [
+    {
+      "Id": 1,
+      "Name": "Player 1",
+      "Sign": "X"
+    },
+    {
+      "Id": 2,
+      "Name": "Player 2",
+      "Sign": "O"
+    }
+  ],
+  "grid": {
+    "grid": [
+      "1",
+      "2",
+      "X",
+      "4",
+      "5",
+      "O",
+      "7",
+      "8",
+      "X"
+    ]
+  },
+  "a": null,
+  "filledCells": [
+    3,
+    6,
+    9
+  ],
+  "currentPlayer": {
+    "Id": 2,
+    "Name": "Player 2",
+    "Sign": "O"
+  }
+}
