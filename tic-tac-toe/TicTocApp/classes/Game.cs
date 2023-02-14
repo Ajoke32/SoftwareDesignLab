@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -11,85 +12,81 @@ namespace TicTocApp.classes
 {
     public class Game
     {
-        public Player[] players { get;} = { new Player() { Id = 1, Name = "Player 1" }, new Player() { Id = 2, Name = "Player 2" }}; 
-
+      
+ 
+        private readonly PlayerRepository _repo;
+        private char[] Signs = { 'X', 'O' };
+        public Game()
+        {
+            _repo = new PlayerRepository(new Store());
+        }
         public Grid grid { get;set; } = new Grid();
 
-        private FileSaverJson saver = new FileSaverJson();
-        public int[] a { get; set; }
         public int[][] combinations = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 },
             new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 }, new int[] { 3, 6, 9 }, new int[] { 1, 5, 9 }, new int[] { 3, 5, 7 } };
 
-        public HashSet<int> filledCells { get; set; } = new HashSet<int>();
+        public Dictionary<int, int> Moves { get; set; } = new Dictionary<int, int>();
 
-        public Player currentPlayer { get; set; } = null;
+        public Player? currentPlayer { get; set; }
         public void Start()
         {
             grid.Draw();
-            Console.WriteLine("\nLet's play Tic Tac Toe\n");
-            players[0].Sign = 'X';
-            players[1].Sign = 'O';
-            Console.WriteLine($"{players[0].Name}: {players[0].Sign}");
-            Console.WriteLine($"{players[1].Name}: {players[1].Sign}");
+            _repo.AddPlayer(new Player() {Name="Player 1",Id=1});
+            _repo.AddPlayer(new Player() {Name = "Player 2", Id=2});
+            DisplayGameInfo();
             if (currentPlayer == null)
             {
-                currentPlayer = players[0];
+                currentPlayer = _repo.GetAllPlayers()[0];
             }
             Console.WriteLine($"\nPlayer {currentPlayer.Name} turn");
         }
-
-        public void LoadGame()
-        {
-            var info = saver.GetFile();
-            grid = info.grid;
-            currentPlayer = info.currentPlayer;
-            filledCells = info.filledCells;
-        }
-        public bool Move(int position, int playerId)
+        public bool Move(int position)
         {
 
-            if (filledCells.Contains(position) || position > 9)
+            if (Moves.ContainsKey(position) || position > 9)
             {
-                Console.WriteLine("Move not accepted, Enter valid number!");
+                Console.WriteLine("Move not accepted, enter valid number!");
                 return false;
             }
-            filledCells.Add(position);
-            var player = players.FirstOrDefault(p => p.Id == playerId);
-            player.Moves.Add(position, true);
+            Moves[position] = currentPlayer.Id;
             grid.Draw(position,currentPlayer.Sign);
-            return CheckWin(playerId);
+            return CheckWin(currentPlayer.Id);
         }
         public bool CheckWin(int playerId)
         {
-            var player = players.FirstOrDefault(p => p.Id == playerId);
-            if (player == null)
-            {
-                return false;
-            }
-            
             foreach (var item in combinations)
             {
-                var result = Array.FindAll(item, i => player.Moves.ContainsKey(i)==true);
+                var result = Array.FindAll(item, i => Moves.ContainsKey(i)&&Moves[i]==playerId);
+
                 if (result.Length == 3)
                 {
-                    Console.WriteLine($"\nWinner player {currentPlayer.Name}");
-                    return true;
-                }
-                if (filledCells.Count == 9 && result.Length != 3)
-                {
-                    Console.WriteLine($"\nDraw!");
+                    Console.WriteLine($"\nWinner player {currentPlayer?.Name}");
                     return true;
                 }
             }
+            if (Moves.Count == 9)
+            {
+                Console.WriteLine($"\nDraw!");
+                return true;
+            }
 
-            ChangeMoves(playerId);
+            ChangePlayer(playerId);
             return false;
         }
-
-
-        private int ChangeMoves(int id)
+        private void DisplayGameInfo()
         {
-            var player = players.FirstOrDefault(p => p.Id != id);
+            Console.WriteLine("\nLet's play Tic Tac Toe\n");
+            var players = _repo.GetAllPlayers();
+            for (int i = 0;i<players.Count;i++)
+            {
+                players[i].Sign = Signs[i];
+                players[i].Sign = Signs[i];
+                Console.WriteLine($"{players[i].Name}:{players[i].Sign}");
+            }
+        }
+        private int ChangePlayer(int playerId)
+        {
+            var player = _repo.GetNextPlayerAfterId(playerId);
             if (player == null)
             {
                 return 0;
@@ -97,15 +94,6 @@ namespace TicTocApp.classes
             currentPlayer = player;
             Console.WriteLine($"\n{currentPlayer.Name} turn");
             return player.Id;
-        }
-        public void ChangePlayers()
-        {
-            Array.Reverse(players);
-        }
-
-        public void SaveGame()
-        {
-            saver.SaveFile(this);
         }
     }
 }

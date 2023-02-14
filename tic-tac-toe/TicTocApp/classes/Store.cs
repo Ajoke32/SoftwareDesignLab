@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace TicTocApp.classes
 {
-    public class Player
+    public class Store
     {
-        public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public char Sign { get; set; }
+        public List<Player> Players { get; } = new List<Player>();
     }
 }
