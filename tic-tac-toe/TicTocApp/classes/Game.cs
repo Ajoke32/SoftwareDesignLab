@@ -16,23 +16,25 @@ namespace TicTocApp.classes
  
         private readonly PlayerRepository _repo;
         private char[] Signs = { 'X', 'O' };
+
+        public Grid grid { get; set; } = new Grid();
+
+        private int[][] combinations = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 },
+            new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 }, new int[] { 3, 6, 9 }, new int[] { 1, 5, 9 }, new int[] { 3, 5, 7 } };
+
+        public Dictionary<int, int> Moves { get; set; }
+
+        public Player? currentPlayer { get; set; }
         public Game()
         {
             _repo = new PlayerRepository(new Store());
+            Moves = new Dictionary<int, int>();
+            _repo.AddPlayer(new Player() { Name = "Player 1", Id = 1 });
+            _repo.AddPlayer(new Player() { Name = "Player 2", Id = 2 });
         }
-        public Grid grid { get;set; } = new Grid();
-
-        public int[][] combinations = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 },
-            new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 }, new int[] { 3, 6, 9 }, new int[] { 1, 5, 9 }, new int[] { 3, 5, 7 } };
-
-        public Dictionary<int, int> Moves { get; set; } = new Dictionary<int, int>();
-
-        public Player? currentPlayer { get; set; }
         public void Start()
         {
             grid.Draw();
-            _repo.AddPlayer(new Player() {Name="Player 1",Id=1});
-            _repo.AddPlayer(new Player() {Name = "Player 2", Id=2});
             DisplayGameInfo();
             if (currentPlayer == null)
             {
@@ -52,7 +54,7 @@ namespace TicTocApp.classes
             grid.Draw(position,currentPlayer.Sign);
             return CheckWin(currentPlayer.Id);
         }
-        public bool CheckWin(int playerId)
+        private bool CheckWin(int playerId)
         {
             foreach (var item in combinations)
             {
@@ -80,19 +82,18 @@ namespace TicTocApp.classes
             for (int i = 0;i<players.Count;i++)
             {
                 players[i].Sign = Signs[i];
-                players[i].Sign = Signs[i];
                 Console.WriteLine($"{players[i].Name}:{players[i].Sign}");
             }
         }
         private int ChangePlayer(int playerId)
         {
-            var player = _repo.GetNextPlayerAfterId(playerId);
+            var player = _repo.GetFirstPlayerExceptId(playerId);
             if (player == null)
             {
                 return 0;
             }
             currentPlayer = player;
-            Console.WriteLine($"\n{currentPlayer.Name} turn");
+            Console.WriteLine($"\n{currentPlayer.Name} turn, sign {currentPlayer.Sign}");
             return player.Id;
         }
     }

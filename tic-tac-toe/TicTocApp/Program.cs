@@ -26,11 +26,22 @@ while (true)
     var val = Console.ReadLine();
     if (val == string.Empty)
     {
-        break;
+        Console.WriteLine("incorrect input!");
+        continue;
     }
     if (val == "S"||val=="s")
     {
         saver.SaveFile();
+        continue;
+    }
+    if(val =="e")
+    {
+        Console.WriteLine("Game over");
+        break;
+    }
+    if (!int.TryParse(val, out _))
+    {
+        Console.WriteLine("incorrect input!");
         continue;
     }
     bool res = game.Move(int.Parse(val));

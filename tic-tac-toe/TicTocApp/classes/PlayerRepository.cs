@@ -25,7 +25,7 @@ namespace TicTocApp.classes
             return _store.Players.FirstOrDefault(p => p.Id == id);
         }
 
-        public Player? GetNextPlayerAfterId(int id)
+        public Player? GetFirstPlayerExceptId(int id)
         {
             return _store.Players.FirstOrDefault(p => p.Id != id);
         }

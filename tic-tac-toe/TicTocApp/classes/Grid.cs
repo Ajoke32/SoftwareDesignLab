@@ -13,7 +13,6 @@ namespace TicTocApp.classes
         public void Draw(int position = 0, char playerSign = 'n')
         {
             Console.Clear();
-
             for (int i = 0; i < cells.Length; i++)
             {
                 if (position > 0 && i == position - 1)

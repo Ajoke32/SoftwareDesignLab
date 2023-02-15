@@ -18,7 +18,6 @@ namespace TicTocApp.classes
         public FileSaverJson(object SaveObj)
         {
             SaveObject = SaveObj;
-
         }
         public bool SaveFile()
         {
@@ -28,21 +27,27 @@ namespace TicTocApp.classes
             return true;
         }
 
-        public void LoadFile()
+        public bool LoadFile()
         {
+            if(!File.Exists(Path))
+            {
+                return false;
+            }
             string data = File.ReadAllText(Path);
             var result = JsonSerializer.Deserialize<Game>(data);
-            if (result != null)
+            if (result == null)
             {
-                foreach (var prop in result.GetType().GetProperties())
+                return false;
+            }
+            foreach (var prop in result.GetType().GetProperties())
+            {
+                var info = SaveObject.GetType().GetProperty(prop.Name);
+                if (info != null)
                 {
-                    var info = SaveObject.GetType().GetProperty(prop.Name);
-                    if (info != null)
-                    {
-                        info.SetValue(SaveObject, prop.GetValue(result));
-                    }
+                    info.SetValue(SaveObject, prop.GetValue(result));
                 }
             }
+            return true;
         }
 
         public Game? GetFile()
