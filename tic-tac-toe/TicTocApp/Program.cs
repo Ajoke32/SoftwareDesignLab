@@ -3,17 +3,18 @@ using System.Numerics;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using TicTocApp.classes;
+using TicTocApp.Utils;
+
+GameStateFactory gameStateFactory = new GameStateFactory();
+
+ArgsParser parser = new ArgsParser();
+
+FileSaverJson saver = new FileSaverJson(gameStateFactory);
+
+Game game = new Game(gameStateFactory);
 
 
-
-
-var game = new Game();
-
-var saver = new FileSaverJson(game);
-
-string[] arguments = Environment.GetCommandLineArgs();
-
-if (arguments.Length>=2&&arguments[1] == "--load-saved")
+if (parser.GetParamByName("--load-saved")!=null)
 {
     saver.LoadFile();
 }
@@ -22,24 +23,22 @@ game.Start();
 
 while (true)
 {
+    
     Console.Write("Enter a number:");
+    
     var val = Console.ReadLine();
-    if (val == string.Empty)
-    {
-        Console.WriteLine("incorrect input!");
-        continue;
-    }
+    
     if (val == "S"||val=="s")
     {
         saver.SaveFile();
         continue;
     }
-    if(val =="e")
+    if(val =="e"||val=="E")
     {
         Console.WriteLine("Game over");
         break;
     }
-    if (!int.TryParse(val, out _))
+    if (val == string.Empty || !int.TryParse(val, out _))
     {
         Console.WriteLine("incorrect input!");
         continue;

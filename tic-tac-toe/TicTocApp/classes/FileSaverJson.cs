@@ -7,21 +7,23 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Json.Nodes;
 using System.Reflection;
+using TicTocApp.interfaces;
 
 namespace TicTocApp.classes
 {
-    public class FileSaverJson
+    internal class FileSaverJson
     {
         public string Path { get; set; } = Directory.GetCurrentDirectory() + "/GameState.json";
 
-        protected object SaveObject;
-        public FileSaverJson(object SaveObj)
+        private  IGameState _gameState;
+
+        public FileSaverJson(GameStateFactory stateFactory)
         {
-            SaveObject = SaveObj;
+            _gameState = stateFactory.GetGameState();
         }
         public bool SaveFile()
         {
-            var savedata = JsonSerializer.Serialize(SaveObject, new JsonSerializerOptions() { WriteIndented = true });
+            var savedata = JsonSerializer.Serialize(_gameState, new JsonSerializerOptions() { WriteIndented = true });
             File.WriteAllText(Path, savedata);
             Console.WriteLine("Game saved!");
             return true;
@@ -29,39 +31,31 @@ namespace TicTocApp.classes
 
         public bool LoadFile()
         {
-            if(!File.Exists(Path))
+            if (!File.Exists(Path))
             {
                 return false;
             }
             string data = File.ReadAllText(Path);
-            var result = JsonSerializer.Deserialize<Game>(data);
+            var result = JsonSerializer.Deserialize<GameState>(data);
             if (result == null)
             {
                 return false;
             }
-            foreach (var prop in result.GetType().GetProperties())
+
+            var resultProps = result.GetType().GetProperties();
+
+            var gameStateProps = _gameState.GetType().GetProperties();
+
+            foreach (var prop in resultProps)
             {
-                var info = SaveObject.GetType().GetProperty(prop.Name);
+                var info = gameStateProps.FirstOrDefault(p => p.Name == prop.Name);
                 if (info != null)
                 {
-                    info.SetValue(SaveObject, prop.GetValue(result));
+                    info.SetValue(_gameState, prop.GetValue(result));
                 }
             }
+
             return true;
         }
-
-        public Game? GetFile()
-        {
-            string data = File.ReadAllText(Path);
-            return JsonSerializer.Deserialize<Game>(data);
-        }
-
-        public bool AppendInfo(object data)
-        {
-            var savedata = JsonSerializer.Serialize(data);
-            File.AppendAllText(Path, savedata);
-            return true;
-        }
-
     }
 }

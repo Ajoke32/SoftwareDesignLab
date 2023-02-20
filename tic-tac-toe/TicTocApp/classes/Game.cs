@@ -6,67 +6,70 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using TicTocApp.interfaces;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TicTocApp.classes
 {
-    public class Game
-    {
-      
+    internal class Game
+    {   
  
         private readonly PlayerRepository _repo;
+
         private char[] Signs = { 'X', 'O' };
 
-        public Grid grid { get; set; } = new Grid();
+        private readonly IGameState _gameState;
 
         private int[][] combinations = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 },
             new int[] { 1, 4, 7 }, new int[] { 2, 5, 8 }, new int[] { 3, 6, 9 }, new int[] { 1, 5, 9 }, new int[] { 3, 5, 7 } };
 
-        public Dictionary<int, int> Moves { get; set; }
-
-        public Player? currentPlayer { get; set; }
-        public Game()
+        public Game(GameStateFactory gameStateFactory)
         {
+            _gameState = gameStateFactory.GetGameState();
             _repo = new PlayerRepository(new Store());
-            Moves = new Dictionary<int, int>();
             _repo.AddPlayer(new Player() { Name = "Player 1", Id = 1 });
             _repo.AddPlayer(new Player() { Name = "Player 2", Id = 2 });
         }
         public void Start()
         {
-            grid.Draw();
+            _gameState.grid.Draw();
             DisplayGameInfo();
-            if (currentPlayer == null)
+            if (_gameState.currentPlayer == null)
             {
-                currentPlayer = _repo.GetAllPlayers()[0];
+                _gameState.currentPlayer = _repo.GetAllPlayers()[0];
             }
-            Console.WriteLine($"\nPlayer {currentPlayer.Name} turn");
+            Console.WriteLine($"\nPlayer {_gameState.currentPlayer.Name} turn");
         }
         public bool Move(int position)
         {
 
-            if (Moves.ContainsKey(position) || position > 9)
+            if (_gameState.Moves.ContainsKey(position) || position > 9)
             {
                 Console.WriteLine("Move not accepted, enter valid number!");
                 return false;
             }
-            Moves[position] = currentPlayer.Id;
-            grid.Draw(position,currentPlayer.Sign);
-            return CheckWin(currentPlayer.Id);
+            if (_gameState.currentPlayer != null)
+            {
+                _gameState.Moves[position] = _gameState.currentPlayer.Id;
+                _gameState.grid.Draw(position, _gameState.currentPlayer.Sign);
+                return CheckWin(_gameState.currentPlayer.Id);
+            }
+            
+            return false;
         }
         private bool CheckWin(int playerId)
         {
             foreach (var item in combinations)
             {
-                var result = Array.FindAll(item, i => Moves.ContainsKey(i)&&Moves[i]==playerId);
+                var result = Array.FindAll(item, i => _gameState.Moves.ContainsKey(i)&&_gameState.Moves[i]==playerId);
 
                 if (result.Length == 3)
                 {
-                    Console.WriteLine($"\nWinner player {currentPlayer?.Name}");
+                    Console.WriteLine($"\nWinner player {_gameState.currentPlayer?.Name}");
                     return true;
                 }
             }
-            if (Moves.Count == 9)
+            if (_gameState.Moves.Count == 9)
             {
                 Console.WriteLine($"\nDraw!");
                 return true;
@@ -92,8 +95,8 @@ namespace TicTocApp.classes
             {
                 return 0;
             }
-            currentPlayer = player;
-            Console.WriteLine($"\n{currentPlayer.Name} turn, sign {currentPlayer.Sign}");
+            _gameState.currentPlayer = player;
+            Console.WriteLine($"\n{_gameState.currentPlayer.Name} turn, sign {_gameState.currentPlayer.Sign}");
             return player.Id;
         }
     }
