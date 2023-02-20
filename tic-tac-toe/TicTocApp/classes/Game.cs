@@ -43,7 +43,7 @@ namespace TicTocApp.classes
         public bool Move(int position)
         {
 
-            if (_gameState.Moves.ContainsKey(position) || position > 9)
+            if (_gameState.Moves.ContainsKey(position) || position > 9||position<=0)
             {
                 Console.WriteLine("Move not accepted, enter valid number!");
                 return false;
