@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WareHouseApp.Classes.Category" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WareHouseApp.Classes.Dollar" Collapsed="true">
+    <Position X="5.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\Dollar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WareHouseApp.Classes.Euro" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Classes\Euro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WareHouseApp.Classes.Money" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAABAAAAABAABAAAAAEAAIAAAA=</HashCode>
+      <FileName>Classes\Money.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WareHouseApp.Classes.Product" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAIAAAAAQAAAAAAAAAAAAAAAAACCA=</HashCode>
+      <FileName>Classes\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WareHouseApp.Classes.Report" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAAAAgAgAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Classes\Report.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WareHouseApp.Classes.Reporting" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIgEAAAIAAAgAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Classes\Reporting.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WareHouseApp.Classes.WareHouse" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQQAAAABAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Classes\WareHouse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WareHouseApp.Managers.WareHouseManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAIAAIYAAAAAAAAAAAAAAAAAAAAYA=</HashCode>
+      <FileName>Managers\WareHouseManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WareHouseApp.Repositories.CategoryRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAYAAgAAAAAAIAAAAQAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Repositories\CategoryRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="WareHouseApp.Interfaces.ICategoryRepository" Collapsed="true">
+    <Position X="10.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAYAAAAAAAAAIAAAAQAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Interfaces\ICategoryRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WareHouseApp.Interfaces.ICurrency" Collapsed="true">
+    <Position X="12.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Interfaces\ICurrency.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WareHouseApp.Interfaces.IReportingService" Collapsed="true">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IReportingService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WareHouseApp.Interfaces.IWareHouseManager" Collapsed="true">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAIQAAAAAAAAAAAAAAAAAAAAYA=</HashCode>
+      <FileName>Interfaces\IWareHouseManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
