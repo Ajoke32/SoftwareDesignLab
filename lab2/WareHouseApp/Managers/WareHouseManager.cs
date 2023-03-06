@@ -9,13 +9,15 @@ using WareHouseApp.Stores;
 
 namespace WareHouseApp.Managers
 {
-    internal class WareHouseManager : IWareHouseManager
+    internal class WareHouseManager : IWareHouseManager // Dependency Inversion Principle, клас залежить від інтерфейсу,
+                                                        // а не від іншого класу або від функцій
     {
         // Single Responsibility Principle
-        //ProductRepository відповідає тільки за роботу з продуктами, а генерацію звіту про продукт здійснює зовнішня служба.
-        // WareHouseManager відповідає за роботу з продуктами, а ReportingService відповідає за генерацію звіту про продукт.
+        //ProductRepository відповідає тільки за роботу з продуктами, а генерацію звіту про продукт здійснює зовнішня служба(IReportingService)
         private WareHouse _wareHouse;
         private IReportingService _reportingService;
+
+        // підстановка Лісков, тут можна передати іншу реалізацію репорт сервірсу і все буде працювати
         public WareHouseManager(WareHouse wareHouse, IReportingService reporting)
         {
             _wareHouse = wareHouse;
@@ -28,9 +30,14 @@ namespace WareHouseApp.Managers
             _wareHouse.Products.Add(product);
 
             _wareHouse.LastUpdate = now;
-
-            _reportingService.CreateReport(product, "The product has arrived at the warehouse");
-
+            //використовується один репорт
+            _reportingService.CreateReport(new Report()
+            {
+                Id = Guid.NewGuid(),
+                ProductInfo= product,
+                IsDeleted= false,
+                Description = "Product add to warehouse"
+            });
         }
 
         public void AddProducts(List<Product> products)
@@ -38,7 +45,13 @@ namespace WareHouseApp.Managers
             foreach (Product product in products)
             {
                 AddProduct(product);
-                _reportingService.CreateReport(product, "The product has arrived at the warehouse");
+                _reportingService.CreateReport(new Report()
+                {
+                    Id = Guid.NewGuid(),
+                    ProductInfo = product,
+                    IsDeleted = false,
+                    Description = "Product add to warehouse"
+                });
             }
         }
 
@@ -57,7 +70,17 @@ namespace WareHouseApp.Managers
             var product = GetProductById(id);
             if (product != null)
             {
-                _reportingService.CreateReport(product, "The product has been exported",true);
+                _wareHouse.Products.Remove(product);
+
+                // також можна створити репорт іншого типу 
+                _reportingService.CreateReport(new HTMLReport()
+                {
+                    Id = Guid.NewGuid(),
+                    ProductInfo = product,
+                    IsDeleted = true,
+                    Description = "Product removed from warehouse"
+                });
+
             }
         }
 

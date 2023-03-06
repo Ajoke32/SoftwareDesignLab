@@ -8,7 +8,8 @@ namespace WareHouseApp.Classes
 {
     internal class Dollar : Money
     {
+        // Приклад, коли деталі залежать від астракції, а не на навпаки
         public override char Sign { get=>'$'; }
-        public override string ShortNmae { get => "USD" ;}
+        public override string ShortName { get => "USD" ;}
     }
 }

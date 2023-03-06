@@ -10,6 +10,6 @@ namespace WareHouseApp.Classes
     {
         public override char Sign { get=>'Є';}
 
-        public override string ShortNmae => "EUR";
+        public override string ShortName => "EUR";
     }
 }

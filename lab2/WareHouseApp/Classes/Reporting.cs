@@ -4,37 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WareHouseApp.Interfaces;
+using WareHouseApp.Stores;
 
 namespace WareHouseApp.Classes
 {
-    internal class Reporting : IReportingService
+    internal class Reporting : IReportingService // open–closed principle, ми можемо
+                                                 // розширяти класи, створювати більше спецефічні класи за допомогою IReportingService
+                                                 // при цьому не змінюючи код самого інтерфейсу та його все існуючих наслідуваних об'єктів
+        
     {
-        private List<Report> _reports;
-
-        public int ProductCount { get; set; }
+        private Store _store;
 
 
-        public Reporting()
+        public Reporting(Store store)
         {
-            _reports = new List<Report>();
+            _store = store;
         }
 
-        public void CreateReport(Product product, string description = "no additional information available", bool isDeleted =false)
+        // Liskov Substitution Principle
+        public void CreateReport(IReport report)
         {
-            _reports.Add(new Report
-            {
-                Id = Guid.NewGuid(),
-                ProductInfo= product,
-                Description= description,
-                IsDeleted= isDeleted
-            });
+            _store.reports.Add(report);
         }
 
         public void GetProfitableInvoice()
         {
             Console.WriteLine("\n-----------Profitable Invoice----------\n");
-            var profInvoce = _reports.FindAll(r => r.IsDeleted == false);
-            foreach(var prof in profInvoce)
+            var profInvoce = _store.reports.FindAll(r => r.IsDeleted == false);
+            foreach(IReport prof in profInvoce)
             {
                 prof.PrintReport();
             }
@@ -43,23 +40,26 @@ namespace WareHouseApp.Classes
         public void GetExpenseInvoice()
         {
             Console.WriteLine("\n-----------Expense Invoice----------\n");
-            var profInvoce = _reports.FindAll(r => r.IsDeleted == true);
+            var profInvoce = _store.reports.FindAll(r => r.IsDeleted == true);
             foreach (var prof in profInvoce)
             {
                 prof.PrintReport();
             }
         }
 
+        public void GetProductCount()
+        {
+            var profInvoce = _store.reports.FindAll(r => r.IsDeleted == false);
+            Console.WriteLine($"Count of products {profInvoce.Count}");
+        }
+
         public void GetReports()
         {
-            foreach (Report report in _reports)
+            foreach (Report report in _store.reports)
             {
                 report.PrintReport();
             }
         }
-
-    
-
 
     }
 }

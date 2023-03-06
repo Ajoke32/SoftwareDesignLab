@@ -45,7 +45,7 @@
   <Class Name="WareHouseApp.Classes.Reporting" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIgEAAAIAAAgAAAAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <HashCode>AAIAAAAAAIgEAAAIAAAgAAAAAAAAAAAAAAAAAgAAIAA=</HashCode>
       <FileName>Classes\Reporting.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -90,7 +90,7 @@
   <Interface Name="WareHouseApp.Interfaces.IReportingService" Collapsed="true">
     <Position X="14" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
       <FileName>Interfaces\IReportingService.cs</FileName>
     </TypeIdentifier>
   </Interface>

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WareHouseApp.Classes;
+using WareHouseApp.Interfaces;
 
 namespace WareHouseApp.Stores
 {
     internal class Store
     {
-        public List<Reporting> Reports { get; } = new List<Reporting>();
-
-        public List<Category> Categories { get; } = new List<Category>();
+        public List<IReport> reports { get; set; } =  new List<IReport>();
+        public List<Category>? Categories { get; set; }
     }
 }

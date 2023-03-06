@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WareHouseApp.Interfaces;
 
 namespace WareHouseApp.Classes
 {
-    internal class Report
+    internal class Report:IReport //SRP - клас відповідає виключно за репорти
     {
         public Guid Id { get; set; }
         public Product? ProductInfo { get; set; }
@@ -16,7 +17,7 @@ namespace WareHouseApp.Classes
 
         public void PrintReport()
         {
-            Console.WriteLine($"| Report {Id} |\nProduct {ProductInfo.Name} {ProductInfo.Id}(id)" +
+            Console.WriteLine($"| Report {Id} |\nProduct: {ProductInfo.Name} {ProductInfo.Id}(id)" +
                    $"\nArrival date:{ProductInfo.Arrivas}\n{Description}" +
                    $"\n-------------------------------------\n");
         }

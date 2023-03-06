@@ -7,8 +7,13 @@ using WareHouseApp.Classes;
 
 namespace WareHouseApp.Interfaces
 {
-    internal interface IReportingService
+    internal interface IReportingService //interface segregation principle інтерфейси поділені на більш малі частини,  що відповідають за певний функціонал
     {
-        public void CreateReport(Product product,string description = "no additional information available", bool isDeleted = false);
+        //наприклад цей інтерфейс відповідає за роботу з звітністю на складі
+        public void CreateReport(IReport report);
+
+        // open–closed principle, ми можемо
+        // розширяти класи, створювати більше спецефічні класи за допомогою IReportingService
+        // при цьому не змінюючи код самого інтерфейсу та його вже існуючих наслідуваних об'єктів
     }
 }
