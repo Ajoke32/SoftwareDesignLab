@@ -1,0 +1,15 @@
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\bin\Debug\net7.0\PaternsImpl.exe
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\bin\Debug\net7.0\PaternsImpl.deps.json
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\bin\Debug\net7.0\PaternsImpl.runtimeconfig.json
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\bin\Debug\net7.0\PaternsImpl.dll
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\bin\Debug\net7.0\PaternsImpl.pdb
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.csproj.AssemblyReference.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.AssemblyInfoInputs.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.AssemblyInfo.cs
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.csproj.CoreCompileInputs.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.dll
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\refint\PaternsImpl.dll
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.pdb
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\PaternsImpl.genruntimeconfig.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\PaternsImpl\PaternsImpl\obj\Debug\net7.0\ref\PaternsImpl.dll
