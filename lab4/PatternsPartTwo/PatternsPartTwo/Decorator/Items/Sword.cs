@@ -16,13 +16,25 @@ namespace PatternsPartTwo.Decorator.Items
             Inventory.Add(Description());
         }
 
-        public override int Attac()
-        {
-            return _hero.Attac()+Damage;
-        }
+
         public string Description()
         {
             return "+30 to damage, +40 to hero wage";
+        }
+
+        public override int GetArmor()
+        {
+            return _hero.GetArmor();
+        }
+
+        public override int GetDamage()
+        {
+            return _hero.GetDamage()+Damage;
+        }
+
+        public override int GetHitPoints()
+        {
+            return _hero.GetHitPoints();
         }
     }
 }

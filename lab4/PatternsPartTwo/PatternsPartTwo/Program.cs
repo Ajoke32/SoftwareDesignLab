@@ -29,11 +29,13 @@ Hero palldin = new Coat(new Sword(new Palladin()));
 Hero mage = new Staff(new Coat(new Mage()));
 
 //the same coat and sword in another hero
-Hero warrior = new Sword(new Coat(new Warrior()));
+Hero warrior = new Sword(new Coat(new MagicBall(new Warrior())));
 
 //Damage must be the same
-Console.WriteLine(palldin.Attac());
-Console.WriteLine(warrior.Attac());
+Console.WriteLine(mage.GetDamage());
+
+Console.WriteLine(warrior.GetDamage());
+Console.WriteLine(palldin.GetDamage());
 
 
 

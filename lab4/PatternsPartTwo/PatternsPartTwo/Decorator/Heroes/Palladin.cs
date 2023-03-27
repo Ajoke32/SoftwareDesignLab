@@ -9,11 +9,19 @@ namespace PatternsPartTwo.Decorator.Heroes
 {
     internal class Palladin : Hero
     {
-
-
-        public override int Attac()
+        public override int GetArmor()
         {
-            return Damage += 5;
+            return Armor += 6;
+        }
+
+        public override int GetDamage()
+        {
+            return Damage += 2;
+        }
+
+        public override int GetHitPoints()
+        {
+            return HitPoints += 7;
         }
     }
 }

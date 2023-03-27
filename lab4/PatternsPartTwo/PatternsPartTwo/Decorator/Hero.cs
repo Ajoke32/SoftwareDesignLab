@@ -15,7 +15,11 @@ namespace PatternsPartTwo.Decorator
 
         public int Damage { get; protected set; }
 
-        public abstract int Attac();
+        public abstract int GetDamage();
+
+        public abstract int GetArmor();
+
+        public abstract int GetHitPoints();
 
         public  List<string> Inventory { get; protected set; }
     }

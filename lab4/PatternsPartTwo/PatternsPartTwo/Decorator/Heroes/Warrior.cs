@@ -10,9 +10,20 @@ namespace PatternsPartTwo.Decorator.Heroes
     internal class Warrior : Hero
     {
 
-        public override int Attac()
+
+        public override int GetArmor()
         {
-            return Damage += 5;
+            return Damage += 3;
+        }
+
+        public override int GetHitPoints()
+        {
+            return HitPoints += 5;
+        }
+
+        public override int GetDamage()
+        {
+            return Damage += 3;
         }
     }
 }

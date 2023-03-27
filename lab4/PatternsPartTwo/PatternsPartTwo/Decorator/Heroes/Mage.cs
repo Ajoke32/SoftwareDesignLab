@@ -9,10 +9,19 @@ namespace PatternsPartTwo.Decorator.Heroes
 {
     internal class Mage : Hero
     {
-
-        public override int Attac()
+        public override int GetArmor()
         {
-            return Damage += 2;
+            return Armor += 2;
+        }
+
+        public override int GetDamage()
+        {
+            return Damage += 8;
+        }
+
+        public override int GetHitPoints()
+        {
+            return HitPoints += 3;
         }
     }
 }

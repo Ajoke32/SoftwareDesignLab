@@ -17,14 +17,26 @@ namespace PatternsPartTwo.Decorator.Items
         }
 
 
-        public override int Attac()
-        {
-            return Damage;
-        }
+
 
         public string Description()
         {
             return "+10 to damage, +5 to magic power, type: attac by area";
+        }
+
+        public override int GetArmor()
+        {
+           return _hero.Armor;
+        }
+
+        public override int GetDamage()
+        {
+            return _hero.GetDamage() + Damage;
+        }
+
+        public override int GetHitPoints()
+        {
+            return _hero.GetHitPoints();
         }
     }
 
