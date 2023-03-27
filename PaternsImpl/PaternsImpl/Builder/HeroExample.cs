@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PaternsImpl.Builder
 {
-    internal class MyPersonality
+    internal class HeroExample
     {
         private string _eyes;
 

@@ -13,7 +13,7 @@ using PaternsImpl.Prototype;
 using PaternsImpl.Singletone;
 
 
-/*
+
 var subFactory = new SubscribeFactory();
 
 var store = new Store();
@@ -57,16 +57,21 @@ switch (choice)
         break;
     default: throw new Exception("App does not exist");
 }
-*/
+
+
+
+
 
 /*
-Console.WriteLine("1.Mens clothes 2.WomanClothes 3.ChildClothes");
-var st = Console.ReadLine();
-
 IClothesFactory? factory = null;
 
-switch (int.Parse(st))
+
+while (true)
 {
+    Console.WriteLine("1.Mens clothes 2.WomanClothes 3.ChildClothes");
+    var st = Console.ReadLine();
+    switch (int.Parse(st))
+    {
     case 1:factory = new MensClothesFactory();
      break;
     case 2:
@@ -75,29 +80,35 @@ switch (int.Parse(st))
     case 3:
         factory = new ChildClothesFactory();
      break;
+    default: throw new Exception("err");
+    }
+
+   var app = new App(factory);
+   Console.WriteLine("1.Create t-shirt 2.Create pants 3.Create socks");
+
+
+
+    var clothes = Console.ReadLine();
+    switch (int.Parse(clothes))
+    {
+        case 1:
+            app.CreateTshirt();
+            app.PrintTshirtInfo();
+            break;
+        case 2:
+            app.CreateTrousers();
+            app.PrintTrousersInfo();
+            break;
+        case 3:
+            app.CreateSocks();
+            app.PrintSocksInfo();
+            break;
+        default: return;
+
+    }
 }
-
-var app = new App(factory);
-Console.WriteLine("1.Create t-shirt 2.Create pants 3.Create socks");
-var clothes = Console.ReadLine();
-
-switch (int.Parse(clothes))
-{
-    case 1:
-        app.CreateTshirt();
-        app.PrintTshirtInfo();
-        break;
-    case 2:
-        app.CreateTrousers();
-        app.PrintTrousersInfo();
-        break;
-    case 3:
-        app.CreateSocks();
-        app.PrintSocksInfo();
-        break;
-}
-
 */
+
 
 
 
@@ -132,7 +143,7 @@ var virus4 = (Virus)parent.Clone();
 
 var virus5 = (VirusChild)virus3.Clone();
 
-Console.WriteLine(virus5.Parent.Name);
+Console.WriteLine(virus2.Parent.Name);
 
 Console.WriteLine(virus4.Name);
 
@@ -140,19 +151,20 @@ parent.AddVirus(virus2);
 parent.AddVirus(virus3);
 parent.AddVirus(virus4);
 parent.AddVirus(virus5);
+
 */
 
-
+/*
 int[] arr = {8,4,6};
 
 var director = new BuilderDirector(new EnemyBuilder());
 
 var director2 = new BuilderDirector(new HeroBuilder());
 
-Life enemy = director.GetLifeBasicSet();
+EnemyExample enemy = director.GetEnemyBasicSet();
 
-MyPersonality pers = director2.GetPeronalityBasicSet();
-Console.WriteLine($"{pers.HairColor} ---- {enemy.HairColor}");
+HeroExample pers = director2.GetHeroBasicSet();
+
 
 
 while (enemy.GetLifeTime()!=0)
@@ -172,7 +184,7 @@ while (enemy.GetLifeTime()!=0)
     }
 }
 
-
+*/
 
 
 

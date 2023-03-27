@@ -10,12 +10,7 @@ using System.Threading.Tasks;
 
 namespace PaternsImpl.FactoryMethod.Apps
 {
-    /// <summary>
-    /// важко зробити щось інше в цих класах, окрім інтефейсних відмінностей відображення в консолі, тому що немає готової архітектури додатку
-    /// а як її писати самому я не знаю.
-    /// якщо це веб додаток, то дані приходилиб з форми, але як це показати тут - я не знаю
-    /// Тому тут просто копіпаст
-    /// </summary>
+ 
     internal class ManagerCall : IApplication
     {
         private SubsсriptionManager _manager;

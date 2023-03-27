@@ -17,7 +17,7 @@ namespace PaternsImpl.AbsctractFactoryMethod.Factories
 
         public ITrousers CreateTrousers()
         {
-            return new WomanPants();
+            return new WomanPants() { TissueType="LG2R", PocketsNumber=12};
         }
 
         public ITShirt CreateTShirt()

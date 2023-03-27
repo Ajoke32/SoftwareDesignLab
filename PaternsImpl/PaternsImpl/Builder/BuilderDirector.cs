@@ -21,7 +21,7 @@ namespace PaternsImpl.Builder
             _builder = builder;
         }
 
-        public MyPersonality GetPeronalityBasicSet()
+        public HeroExample GetHeroBasicSet()
         {
             HeroBuilder heroBuilder = (HeroBuilder)_builder;
             heroBuilder.AddArmor(100)
@@ -32,7 +32,7 @@ namespace PaternsImpl.Builder
             return heroBuilder.GetPersonality();
         }
 
-        public Life GetLifeBasicSet()
+        public EnemyExample GetEnemyBasicSet()
         {
             EnemyBuilder enemyBulider =  (EnemyBuilder) _builder;
            

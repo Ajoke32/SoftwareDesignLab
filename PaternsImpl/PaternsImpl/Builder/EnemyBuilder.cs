@@ -8,20 +8,20 @@ namespace PaternsImpl.Builder
 {
     internal class EnemyBuilder : IBuilder
     {
-        private Life _life = new Life();
+        private EnemyExample _life = new EnemyExample();
 
         private void _reset()
         {
-            _life = new Life();
+            _life = new EnemyExample();
         }
 
         public EnemyBuilder()
         {
             _reset();
         }
-        public Life GetLife()
+        public EnemyExample GetLife()
         {
-            Life life = _life;
+            EnemyExample life = _life;
             _reset();
             return life;
         }

@@ -9,15 +9,15 @@ namespace PaternsImpl.Builder
 
     internal class HeroBuilder : IBuilder
     {
-        private MyPersonality _pers = new MyPersonality();
+        private HeroExample _pers = new HeroExample();
         private void _reset()
         {
-            _pers =  new MyPersonality();
+            _pers =  new HeroExample();
         }
 
-        public MyPersonality GetPersonality()
+        public HeroExample GetPersonality()
         {
-            MyPersonality pers = _pers;
+            HeroExample pers = _pers;
             _reset();
             return pers;
         }
