@@ -4,6 +4,7 @@ using PatternsPartTwo.Adapter;
 using PatternsPartTwo.Decorator;
 using PatternsPartTwo.Decorator.Heroes;
 using PatternsPartTwo.Decorator.Items;
+using PatternsPartTwo.Facade;
 
 
 /*
@@ -20,22 +21,31 @@ adapter.Warn();
 adapter.Error();*/
 
 
+/*
 
-
-//
+//використання декількох екземплярів інвентаря на героях
 Hero palldin = new Coat(new Sword(new Palladin()));
 
-//the same coat in another hero
+
 Hero mage = new Staff(new Coat(new Mage()));
 
-//the same coat and sword in another hero
+
 Hero warrior = new Sword(new Coat(new MagicBall(new Warrior())));
 
-//Damage must be the same
-Console.WriteLine(mage.GetDamage());
 
+Console.WriteLine(mage.GetDamage());
 Console.WriteLine(warrior.GetDamage());
-Console.WriteLine(palldin.GetDamage());
+Console.WriteLine(palldin.GetDamage());*/
+
+
+
+var facade = new BigMacFacade();
+
+facade.AllInclusive();
+
+facade.DoubleCheese();
+
+facade.PotatoCheese();
 
 
 
