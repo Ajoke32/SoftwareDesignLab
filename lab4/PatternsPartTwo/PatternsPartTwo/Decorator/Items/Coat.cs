@@ -7,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace PatternsPartTwo.Decorator.Items
 {
-    internal class Coat : Iitem
+    internal class Coat : BaseHeroSet, Iitem
     {
-        public string Name => "Coat";
-
-        public void Description()
+        public Coat(Hero hero) : base(hero)
         {
-            Console.WriteLine("Protection:5, wage:10");
+            Armor += 5;
+            Inventory.Add(Description());
+       
+        }
+
+        public override int Attac()
+        {
+            return _hero.Attac()+Armor;
+        }
+        public string Description()
+        {
+            return "+5 to protection, +5 to hero weigth";
         }
     }
 }

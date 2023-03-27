@@ -7,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace PatternsPartTwo.Decorator.Items
 {
-    internal class Sword : Iitem
+    internal class Sword : BaseHeroSet,Iitem
     {
-        public string Name => "Sword";
 
-        public void Description()
+        public Sword(Hero hero):base(hero)
         {
-            Console.WriteLine("Damage: 30, protection: 10, wage: 40");
+            Damage += 30;
+            Inventory.Add(Description());
+        }
+
+        public override int Attac()
+        {
+            return _hero.Attac()+Damage;
+        }
+        public string Description()
+        {
+            return "+30 to damage, +40 to hero wage";
         }
     }
 }

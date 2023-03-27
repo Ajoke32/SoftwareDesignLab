@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PatternsPartTwo.Decorator.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,14 @@ namespace PatternsPartTwo.Decorator
 {
     internal abstract class Hero
     {
-        public abstract string Name { get; }
+        public  int HitPoints { get; protected set; }
 
-        public abstract void Attac();
+        public int Armor { get; protected set; }
 
-        public abstract List<string> Inventory { get; set; }
+        public int Damage { get; protected set; }
+
+        public abstract int Attac();
+
+        public  List<string> Inventory { get; protected set; }
     }
 }

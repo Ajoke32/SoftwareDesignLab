@@ -8,8 +8,6 @@ namespace PatternsPartTwo.Decorator.Interface
 {
     internal interface Iitem
     {
-        public string Name { get; }
-
-        public void Description();
+        public string Description();
     }
 }

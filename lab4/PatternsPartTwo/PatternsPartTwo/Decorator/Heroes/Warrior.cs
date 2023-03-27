@@ -9,13 +9,10 @@ namespace PatternsPartTwo.Decorator.Heroes
 {
     internal class Warrior : Hero
     {
-        public override string Name => "Warrior";
 
-        public override List<string> Inventory { get; set; }
-
-        public override void Attac()
+        public override int Attac()
         {
-            Console.WriteLine("Warrior attac");
+            return Damage += 5;
         }
     }
 }
