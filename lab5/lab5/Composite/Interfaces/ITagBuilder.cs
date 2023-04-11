@@ -8,14 +8,17 @@ namespace lab5.Composite.Interfaces
 {
     internal interface ITagBuilder
     {
-        public ITagBuilder SetOpenBracket();
+        
+        public ITagBuilder SetOpenBrackets();
+
+        public ITagBuilder SetCloseBrackets();
 
         public ITagBuilder SetCloseBracket();
 
-        public ITagBuilder SetAttributres();
+        public ITagBuilder SetOpenBracket();
+        public ITagBuilder SetAttributes();
 
         public ITagBuilder SetChilds();
-
         public void Reset();
 
         public string TagToString();

@@ -15,7 +15,7 @@ var node1 = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<str
     {"id","1"}
 });
 
-/*
+
 var img = (LightElementNode)tagFactory.CreateElement("img", new Dictionary<string, string>()
 {
     {"class","img"},
@@ -33,12 +33,12 @@ var div = (LightElementNode)tagFactory.CreateElement("div");
 
 div.AppendChild(tagFactory.CreateTextNode("some text"));
 
-*/
+
 node1.AppendChild(tagFactory.CreateElement("div"));
 node1.AppendChild(tagFactory.CreateElement("p"));
-node1.AppendChild(tagFactory.CreateElement("div"));
+node1.AppendChild(div);
 
 tagComposite.AddChild(node1);
-//tagComposite.AddChild(img);
+tagComposite.AddChild(img);
 
 tagComposite.Display();

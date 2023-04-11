@@ -9,30 +9,31 @@ using System.Xml.Linq;
 
 namespace lab5.Composite.Clasess
 {
-    internal class LigthELementBuilder : ITagBuilder
+    internal class LightELementBuilder : ITagBuilder
     {
         private LightElementNode _node;
 
-        private TagFactory _tagFactory;
+
         private StringBuilder _strBuilder;
-        public LigthELementBuilder()
+        public LightELementBuilder()
         {
-            _tagFactory= new TagFactory();
             _strBuilder = new StringBuilder();
+            _node = new LightElementNode();
             Reset();
         }
-
         public ITagBuilder SetNode(LightElementNode node)
         {
             _node = node;
+
             return this;
         }
         public void Reset()
         {
             _node = new LightElementNode();
+            _strBuilder = new StringBuilder();
         }
 
-        public ITagBuilder SetAttributres()
+        public ITagBuilder SetAttributes()
         {
             if (_node.Attributes.Count > 0)
             {
@@ -50,10 +51,10 @@ namespace lab5.Composite.Clasess
             {
                 _strBuilder.Append("\n" + node.Display() + "\n");
             }
-            return this;
+            return (LightELementBuilder)this;
         }
 
-        public ITagBuilder SetCloseBracket()
+        public ITagBuilder SetCloseBrackets()
         {
 
             _strBuilder.Append("</");
@@ -62,7 +63,7 @@ namespace lab5.Composite.Clasess
             return this;
         }
 
-        public ITagBuilder SetOpenBracket()
+        public ITagBuilder SetOpenBrackets()
         {
             _strBuilder.Append("<");
             _strBuilder.Append(_node.Name);
@@ -72,8 +73,24 @@ namespace lab5.Composite.Clasess
 
         public string TagToString()
         {
+            var stringBuilder = _strBuilder;
             Reset();
-            return _strBuilder.ToString();
+            return stringBuilder.ToString();
+        }
+
+        public ITagBuilder SetOpenBracket()
+        {
+            _strBuilder.Append("<");
+            _strBuilder.Append(_node.Name);
+
+            return this;
+        }
+
+        public ITagBuilder SetCloseBracket()
+        {
+            _strBuilder.Append("/>");
+
+            return this;
         }
     }
 }

@@ -16,6 +16,11 @@ namespace lab5.Composite.Clasess
         {
             Text = text;
         }
+
+        public LightTextNode()
+        {
+
+        }
         
 
         public ViewType ViewType { get; }

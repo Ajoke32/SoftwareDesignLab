@@ -43,7 +43,8 @@ namespace lab5.Composite.Clasess
 
         public LightElementNode()
         {
-
+            Nodes = new List<ILightNode>();
+            Attributes = new Dictionary<string, string>();
         }
 
         public void AppendChild(ILightNode node)
@@ -60,69 +61,29 @@ namespace lab5.Composite.Clasess
                 Nodes.Add(node);
             }
         }
-        private string GetAngleBracket(bool closed = false)
+       
+
+        public string Display()
         {
 
-            StringBuilder strBuider = new StringBuilder();
-            strBuider.Append(!closed ? "<" : "</");
-            strBuider.Append(Name);
-            if (Attributes.Count > 0 && !closed)
+            var tagBuilder = new LightELementBuilder();
+            
+            if(ClosureType==ClosureType.Single)
             {
-                strBuider.Append(GetAttributes());
+                return tagBuilder.SetNode(this)
+                .SetOpenBracket()
+                .SetAttributes()
+                .SetChilds()
+                .SetCloseBracket()
+                .TagToString();
             }
-            strBuider.Append(">");
-            return strBuider.ToString();
-        }
-
-        private string GetAttributes()
-        {
-            StringBuilder strBuider = new StringBuilder();
-            foreach (var item in Attributes)
-            {
-                strBuider.Append($" {item.Key}='{item.Value}'");
-            }
-            return strBuider.ToString();
-        }
-        private string GetSingleBrackets(bool closed = false)
-        {
-
-            StringBuilder strBuider = new StringBuilder();
-            strBuider.Append("<");
-            strBuider.Append(Name);
-            if (Attributes.Count > 0)
-            {
-                strBuider.Append(GetAttributes());
-            }
-            strBuider.Append("/>");
-            return strBuider.ToString();
-        }
-
-        public string? Display()
-        {
-            var tagBuilder = new LigthELementBuilder();
 
             return tagBuilder.SetNode(this)
-                .SetOpenBracket()
-                .SetAttributres()
+                .SetOpenBrackets()
+                .SetAttributes()
                 .SetChilds()
-                .SetCloseBracket().TagToString();
-            /*
-            StringBuilder stringBuilder = new StringBuilder();
-            if (ClosureType == ClosureType.Single)
-            {
-                stringBuilder.Append(GetSingleBrackets());
-                return stringBuilder.ToString();
-            }
-            stringBuilder.Append(GetAngleBracket());
-            if (Nodes.Count > 0)
-            {
-                foreach (var node in Nodes)
-                {
-                    stringBuilder.Append("\n"+node.Display()+"\n");
-                }
-            }
-            stringBuilder.Append(GetAngleBracket(true));
-            return stringBuilder.ToString();*/
+                .SetCloseBrackets()
+                .TagToString();       
         }
 
         public string InnerHtml()
