@@ -37,5 +37,10 @@ namespace lab5.Composite.Composits
             nodes.Remove(node);
         }
 
+        public object Copy()
+        {
+            return nodes;
+        }
+
     }
 }

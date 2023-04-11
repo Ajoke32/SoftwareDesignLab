@@ -10,7 +10,9 @@ namespace lab5.Composite.Factory
 {
     internal class TagFactory
     {
-        private ILightNode? _node;
+
+        private ILightNode _node;
+
         public ILightNode CreateElement(string tagName,Dictionary<string,string>? attributes=null)
         {
             switch (tagName)
@@ -20,15 +22,17 @@ namespace lab5.Composite.Factory
                 case "p": _node = new LightElementNode(tagName, ClosureType.Patrial, ViewType.Block);
                     break;
                 case "img": _node =  new LightElementNode(tagName,ClosureType.Single, ViewType.String);
-                    break;                 
+                    break;
+                default: throw new Exception("Tag not exist");
+                 
             }
             if(attributes!= null&&_node!=null)
             {
                 var node = (LightElementNode)_node;
-                node.Attributes = attributes;
+                node.SetAttributes(attributes);
                 return node;
             }
-            return _node;
+            return _node??new LightElementNode();
         }
 
         public ILightNode CreateTextNode(string text)

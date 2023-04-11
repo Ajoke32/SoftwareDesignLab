@@ -51,7 +51,7 @@ namespace lab5.Composite.Clasess
             {
                 _strBuilder.Append("\n" + node.Display() + "\n");
             }
-            return (LightELementBuilder)this;
+            return this;
         }
 
         public ITagBuilder SetCloseBrackets()

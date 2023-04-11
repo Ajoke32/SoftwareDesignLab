@@ -19,19 +19,22 @@ namespace lab5.Composite.Clasess
         Single,
         Patrial
     }
-    internal class LightElementNode : ILightNode, INodeEditor
+    internal class LightElementNode : ILightNode, INodeEditor, ICloneable
     {
-        public Dictionary<string, string> Attributes { get; set; }
+        public Dictionary<string, string> Attributes { get; protected set; }
 
-        public ViewType ViewType { get; }
+        public ViewType ViewType { get; protected set; }
 
-        public string? Name { get; }
+        public string? Name { get; protected set; }
 
-        public ClosureType ClosureType { get; }
+        public ClosureType ClosureType { get; protected set; }
 
-        public List<ILightNode> Nodes { get; set; }
+        public List<ILightNode> Nodes { get; protected set; }
 
-
+        public void SetAttributes(Dictionary<string, string> attributes)
+        {
+            Attributes = attributes;
+        }
         public LightElementNode(string name, ClosureType closure, ViewType view)
         {
             Name = name;
@@ -45,6 +48,15 @@ namespace lab5.Composite.Clasess
         {
             Nodes = new List<ILightNode>();
             Attributes = new Dictionary<string, string>();
+        }
+
+        public LightElementNode(LightElementNode prototype)
+        {
+            ClosureType = prototype.ClosureType;
+            Nodes = prototype.Nodes;
+            Attributes = prototype.Attributes;
+            ViewType = prototype.ViewType;
+            Name = prototype.Name;
         }
 
         public void AppendChild(ILightNode node)
@@ -120,7 +132,15 @@ namespace lab5.Composite.Clasess
         public void InsertBefore(ILightNode refNode, ILightNode node)
         {
             int index = Nodes.IndexOf(refNode);
-            Nodes.Insert(index + 1, node);
+            if (index != -1)
+            {
+                Nodes.Insert(index + 1, node);
+            }
+        }
+
+        public object Clone()
+        {
+            return new LightElementNode(this);
         }
     }
 }
