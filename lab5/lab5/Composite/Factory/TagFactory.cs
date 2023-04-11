@@ -1,0 +1,39 @@
+﻿using lab5.Composite.Clasess;
+using lab5.Composite.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace lab5.Composite.Factory
+{
+    internal class TagFactory
+    {
+        private ILightNode? _node;
+        public ILightNode CreateElement(string tagName,Dictionary<string,string>? attributes=null)
+        {
+            switch (tagName)
+            {
+                case "div":_node = new LightElementNode(tagName, ClosureType.Patrial, ViewType.Block);
+                    break;
+                case "p": _node = new LightElementNode(tagName, ClosureType.Patrial, ViewType.Block);
+                    break;
+                case "img": _node =  new LightElementNode(tagName,ClosureType.Single, ViewType.String);
+                    break;                 
+            }
+            if(attributes!= null&&_node!=null)
+            {
+                var node = (LightElementNode)_node;
+                node.Attributes = attributes;
+                return node;
+            }
+            return _node;
+        }
+
+        public ILightNode CreateTextNode(string text)
+        {
+            return new LightTextNode(text);
+        }
+    }
+}

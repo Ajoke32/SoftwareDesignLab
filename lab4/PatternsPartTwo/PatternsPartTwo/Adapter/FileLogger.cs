@@ -23,7 +23,7 @@ namespace PatternsPartTwo.Adapter
         public void Log()
         {
             ExplainLine("(＊◕ᴗ◕＊)");
-            FileWriter.WriteLine("Best way do this it`s....");
+            FileWriter.WriteLine("The best way to do this it`s....");
             ExplainLine("(＊◕ᴗ◕＊)");
         }
 

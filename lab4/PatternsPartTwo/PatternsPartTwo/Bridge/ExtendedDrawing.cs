@@ -13,7 +13,7 @@ namespace PatternsPartTwo.Bridge
 
         }
 
-        public void ThreeDimensionDrawing()
+        public void ThreeDimensionalDrawing()
         {
             _shape.Draw();
             Console.WriteLine(" as 3D object");
