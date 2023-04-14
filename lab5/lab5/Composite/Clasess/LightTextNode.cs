@@ -7,27 +7,30 @@ using System.Threading.Tasks;
 
 namespace lab5.Composite.Clasess
 {
-    internal class LightTextNode : ILightNode
+    internal class LightTextNode : BaseNode
     {
-        protected string? Text;
+        protected string Text;
+        public override ViewType ViewType { get; }
 
- 
-        public LightTextNode(string? text)
+        public int Intend { get; set; } = 0;
+
+        public LightTextNode(string text)
         {
             Text = text;
+            ViewType = ViewType.String;
         }
 
-        public LightTextNode()
+        public override string Display()
         {
-
-        }
-        
-
-        public ViewType ViewType { get; }
-
-        public string? Display()
-        {
-            return Text;
+            var s = new StringBuilder();
+            if (Parent != null)
+            {
+                for (int i = 0; i < Parent.Ident; i++)
+                {
+                    s.Append("\t");
+                }
+            }
+            return s.Append(Text).ToString();
         }
     }
 }

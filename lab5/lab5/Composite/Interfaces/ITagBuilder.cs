@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using lab5.Composite.Clasess;
 
 namespace lab5.Composite.Interfaces
 {
-    internal interface ITagBuilder
-    {
-        
-        public ITagBuilder SetOpenBrackets();
+	internal interface ITagBuilder
+	{
+		
+		public ITagBuilder SetOpenBrackets();
 
-        public ITagBuilder SetCloseBrackets();
+		public ITagBuilder SetCloseBrackets();
 
-        public ITagBuilder SetCloseBracket();
+		public ITagBuilder SetCloseBracket();
 
-        public ITagBuilder SetOpenBracket();
-        public ITagBuilder SetAttributes();
+		public ITagBuilder SetOpenBracket();
+		public ITagBuilder SetAttributes();
 
-        public ITagBuilder SetChilds();
-        public void Reset();
+		public ITagBuilder SetChilds();
+		public void Reset();
 
-        public string TagToString();
-    }
+		public ITagBuilder SetNode(LightElementNode node);
+		public string TagToString();
+		
+		public ITagBuilder SetIntention();
+		
+		public ITagBuilder SetSlash();
+	}
 }

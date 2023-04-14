@@ -15,7 +15,7 @@
 
 # Mono auto generated files
 mono_crash.*
-
+*.vscode
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -351,7 +351,9 @@ OpenCover/
 
 # Azure Stream Analytics local run output
 ASALocalRun/
-
+*.bin
+bin/
+obj/
 # MSBuild Binary and Structured Log
 *.binlog
 

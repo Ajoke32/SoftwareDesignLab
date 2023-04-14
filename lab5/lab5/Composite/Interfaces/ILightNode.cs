@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace lab5.Composite.Interfaces
 {
-    internal interface ILightNode
-    {
-        public string Display();
+	internal interface ILightNode
+	{
+		public string Display();
 
-        public ViewType ViewType { get; }
+		public ViewType ViewType { get; }
 
-    }
+		public LightElementNode Parent { get;set;}
+		
+	}
 }

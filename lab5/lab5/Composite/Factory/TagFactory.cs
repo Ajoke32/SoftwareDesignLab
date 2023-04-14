@@ -10,7 +10,7 @@ namespace lab5.Composite.Factory
 {
     internal class TagFactory
     {
-
+        
         private ILightNode _node;
 
         public ILightNode CreateElement(string tagName,Dictionary<string,string>? attributes=null)
