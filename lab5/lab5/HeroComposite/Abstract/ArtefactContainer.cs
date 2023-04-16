@@ -3,7 +3,7 @@ using lab5.HeroComposite.Interfaces;
 
 namespace lab5.HeroComposite.Abstract
 {
-	internal abstract class ArtefactContainer<A> : IContainable<A> where A : Artefact
+	internal abstract class ArtefactContainer<A> :Entitet, IContainable<A> where A : Artefact
 	{
 
 		public List<string> ArtefactTypes { get; protected set; }

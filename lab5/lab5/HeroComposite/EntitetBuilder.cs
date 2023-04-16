@@ -37,9 +37,9 @@ namespace lab5.HeroComposite
 			return this;
 		}
 		
-		public EntitetBuilder AddArtefact<V,K>(Entitet artefact) where V : ContainableEntitetBase<K> where K:Entitet 
+		public EntitetBuilder AddArtefact<V,K>(K artefact) where V : ContainableEntitetBase<K> where K:Entitet 
 		{
-			((V)_entitet).AddArtefact((K)artefact);
+			((V)_entitet).AddArtefact(artefact);
 			return this;
 		}
 		

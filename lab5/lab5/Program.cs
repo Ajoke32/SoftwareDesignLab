@@ -48,45 +48,23 @@ using lab5.HeroComposite.Interfaces;
 
 
 
-/// якщо робити контейнер не артефектом, то виходить надлишкове дублювання коду
-/// - Наприклад: List<Artefact> artefacts;, далі методи на додавання і видалення, методи для розрахунку
-/// 
-// - Потім завдання про "Додайте в друзі" не зрозуміле
-// - Це повинний бути окремий List<Heros> _friends чи щось інше ?
-// - Якщо додати в друзі, то виходить, що і герой вже також Артефакт, або Контейнер 
-
-// - Якщо PowerOfGlow контейнер, а не артефакт, то який від нього сенс в прогамі ?
-// - Знову створювати List<Containers> для героя, оскільки герої носять артефакти, а не контейнери ?
-// - PowerOfGlove  на інтуїтивному рівні задається річчю, яку можна прицепити на героя, тобто також артефакт
-// - Можливо контейнер малось на увазі як стор якийсь, кди можна запихнути артефакти, як в сумку
-// - але цю сумку всеодно можна повісити на героя
-
-// - В самому паттерні, особливо в класичному його виді, всі методи викликаються по дереву, від батька до дітей
-// - Якщо в героя вже є контейнер, або інший герой, то вони також повинні виконати якийсь спільний Operation() і так далі
-// - Я намагався ділити ці сутності, але потім рахувати той самий Count в Composite - просто неможливо
-// - тому що операція в Composite одна, а контейнери не артефакти,  а це означає if...else
-
 
 // Change request: Heroes should support the addition of Containable
-//  go to Containable abstract class, and  do this: Containable:Entitet,IContainable
-//  now all Containable classes is Entitet, than can be added to List<Entitet>
-//sample //
+// Change class ArtefactContainer<A> :IContainable<A> where A : Artefact
+// to class ArtefactContainer<A> :Entitet, IContainable<A> where A : Artefact
 
-var b = new MarvelHero<Entitet>();
-var b2 =  new MarvelHero<Artefact>();
-var r = new Ring();
-
-var g = new GloveOfPower<Artefact>();
+var g  = new GloveOfPower<Artefact>();
 
 var builder = new EntitetBuilder();
-var hero = builder.SetEntitet<MarvelHero<Artefact>>(new MarvelHero<Artefact>())
-.SetName("BlackWidow").SetWeight(50).SetNature<MarvelHero<Artefact>,Artefact>(Nature.Kind)
-.AddArtefact<MarvelHero<Artefact>,Artefact>(r)
-.SetType<MarvelHero<Artefact>,Artefact>(HeroType.Warrior)
-.GetBuilded<MarvelHero<Artefact>>();
+var hero = builder.SetEntitet<MarvelHero<Entitet>>(new MarvelHero<Entitet>())
+.SetName("BlackWidow").SetWeight(50).SetNature<MarvelHero<Entitet>,Entitet>(Nature.Kind)
+.AddArtefact<MarvelHero<Entitet>,Entitet>(g)
+.SetType<MarvelHero<Entitet>,Entitet>(HeroType.Warrior)
+.GetBuilded<MarvelHero<Entitet>>();
 
 // System.Console.WriteLine(hero.GetCount());
 System.Console.WriteLine(hero.Type);
+System.Console.WriteLine(hero.Nature);
 /*
 hero.CountArtefacts();
 hero.CalculateArtefactsWeight();
