@@ -8,9 +8,9 @@ namespace lab5.HeroComposite
 	{
 		private  Entitet _entitet;
 		
-		public  EntitetBuilder SetEntitet<V>(V entitet) where V : Entitet
+		public  EntitetBuilder SetEntitet(Entitet entitet)
 		{
-			_entitet = (V)entitet;
+			_entitet = entitet;
 			return this;
 		}
 		public  EntitetBuilder SetName(string name)
@@ -24,12 +24,23 @@ namespace lab5.HeroComposite
 			return this;
 		}
 		
+		public EntitetBuilder SetPower(int power)
+		{
+			_entitet.SetPower(power);
+			return this;
+		}
 		
 		public EntitetBuilder SetType<V,K>(HeroType type) where V : MarvelHero<K> where K : Entitet
 		{
 			((V)_entitet).SetHeroType(type);
 			return this;
 		}
+		public EntitetBuilder IsMain<V,K>(bool IsMain) where V : MarvelHero<K> where K : Entitet
+		{
+			((V)_entitet).IsMainHero=IsMain;
+			return this;
+		}
+		
 		
 		public EntitetBuilder SetNature<V,K>(Nature nature) where V : MarvelHero<K> where K:Entitet
 		{

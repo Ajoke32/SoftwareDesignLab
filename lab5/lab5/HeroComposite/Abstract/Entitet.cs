@@ -2,15 +2,10 @@ using System;
 
 namespace lab5.HeroComposite.Abstract
 {
-	internal interface IEntitet
-	{
-		public string Name { get;}
-		public int Weight { get;}
-		public int Power { get;}
-		
-	}
+	
 	internal abstract class Entitet
 	{
+		public int BasicUnit {get;}=1;
 		public string Name { get;protected set;}
 		public int Weight { get; protected set; }
 		public int Power { get;protected set; }
@@ -32,7 +27,18 @@ namespace lab5.HeroComposite.Abstract
 		
 		public virtual int GetCount()
 		{
-			return 1;
+			return BasicUnit;
 		}
+		
+		public virtual int GetWeight()
+		{
+			return Weight;
+		}
+		
+		public virtual int GetPower()
+		{
+		 	return Power;	
+		}
+		
 	}
 }
