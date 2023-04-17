@@ -1,50 +1,65 @@
-﻿
-
+﻿using System.Diagnostics;
+using lab5;
 using lab5.Composite.Clasess;
 using lab5.Composite.Composits;
 using lab5.Composite.Factory;
 using lab5.Composite.Interfaces;
+using lab5.FlyWeight.Classes;
 using lab5.HeroComposite;
 using lab5.HeroComposite.Abstract;
 using lab5.HeroComposite.ArtefactContainers;
 using lab5.HeroComposite.Artefacts;
 using lab5.HeroComposite.Interfaces;
+using lab5.Proxy.Classes;
+using lab5.Proxy.Proxies;
 
 // // LightHTML
-// var tagFactory = new TagFactory();
+/*
+var tagFactory = new TagFactory();
 
 
-// var tagComposite = new TagComposite();
+var tagComposite = new TagComposite();
 
-// var node1 = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>()
-// {
-// 	{"class","center mg"},
-// 	{"id","1"}
-// });
-// var node2= (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>()
-// {
-// 	{"class","wrapper"},
-// 	{"id","12"}
-// });
+var node1 = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>()
+{
+	{"class","center mg"},
+	{"id","1"}
+});
+var node2= (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>()
+{
+	{"class","wrapper"},
+	{"id","12"}
+});
 
-// var img = (LightElementNode)tagFactory.CreateElement("img", new Dictionary<string, string>()
-// {
-// 	{"class","img"},
-// 	{"id","15"}
-// });
-// var p = (LightElementNode)tagFactory.CreateElement("p");
-// var p2 = (LightElementNode)tagFactory.CreateElement("p");
-// p2.AppendChild(tagFactory.CreateTextNode("text"));
-// p.Parent=(LightElementNode)tagFactory.CreateElement("div");
+var img = (LightElementNode)tagFactory.CreateElement("img", new Dictionary<string, string>()
+{
+	{"class","img"},
+	{"id","15"}
+});
+var p = (LightElementNode)tagFactory.CreateElement("p");
+var p2 = (LightElementNode)tagFactory.CreateElement("p");
+p2.AppendChild(tagFactory.CreateTextNode("text"));
+p.Parent=(LightElementNode)tagFactory.CreateElement("div");
 
-// p.AppendChild(p2);
-// node1.AppendChild(node2);
-// node2.AppendChild(p);
-// tagComposite.AddChild(node1);
-// tagComposite.AddChild(img);
-// tagComposite.Display();
-
-// // LightHTML
+p.AppendChild(p2);
+node1.AppendChild(node2);
+node2.AppendChild(p);
+tagComposite.AddChild(node1);
+tagComposite.AddChild(img);
+tagComposite.Display();*/
+/*
+<div class='center mg' id='1'>
+		<div class='wrapper' id='12'>
+				<p>
+						<p>
+						text
+						</p>
+				</p>
+		</div>
+</div>
+<img class='img' id='15'/>
+*/
+// LightHTML
 
 
 
@@ -110,6 +125,70 @@ System.Console.WriteLine(composite.GetCount());
 System.Console.WriteLine(composite.GetPower());
 System.Console.WriteLine(composite.GetWeight());
 */
+
+/*
+string path = Directory.GetCurrentDirectory()+"//Proxy//Password_admin.txt";
+
+var locker = new SmartTextReaderLocker("admin");
+locker.Read(path);
+
+path+="error";
+
+var checker = new SmartTextChecker(new SmartTextReader());
+checker.Read(path);
+
+path = path.Replace("error","");
+
+var reader = new SmartTextReader();
+reader.Read(path);*/
+
+
+/*
+var flyDoc = new FlyDocumentParser($"{Directory.GetCurrentDirectory()}//Proxy//Password_admin.txt");
+
+flyDoc.Render();
+
+long size = System.GC.GetTotalMemory(true);
+
+Process proc = Process.GetCurrentProcess();
+Console.WriteLine($"Allocated Private Memory: {proc.PrivateMemorySize64.ToSmallestFullSize()}");
+Console.WriteLine($"Physical Memory Usage: {proc.WorkingSet64.ToSmallestFullSize()}");
+
+Console.WriteLine("FlySize: " + size/(1024.0 * 1024.0)+" MB");*/
+
+
+/*
+var defaultDoc = new DocumentParser($"{Directory.GetCurrentDirectory()}//Proxy//Password_admin.txt");
+
+defaultDoc.Render();
+
+long size2 = System.GC.GetTotalMemory(true);
+Process proc = Process.GetCurrentProcess();
+Console.WriteLine($"Allocated Private Memory: {proc.PrivateMemorySize64.ToSmallestFullSize()}");
+Console.WriteLine($"Physical Memory Usage: {proc.WorkingSet64.ToSmallestFullSize()}");
+Console.WriteLine("DefaultSize: " + size2 / (1024.0 * 1024.0) + " MB");*/
+
+/*
+Allocated Private Memory: 19.02 MB
+Physical Memory Usage: 31.59 MB
+FlySize: 4.5618438720703125 MB
+
+PS C:\Users\bekke\source\repos\SoftwareDesignLab\lab5\lab5> dotnet run
+
+Allocated Private Memory: 19.56 MB
+Physical Memory Usage: 32.23 MB
+DefaultSize: 4.562080383300781 MB
+///
+Allocated Private Memory: 25.91 MB
+Physical Memory Usage: 38.38 MB
+FlySize: 9.032005310058594 MB
+
+PS C:\Users\bekke\source\repos\SoftwareDesignLab\lab5\lab5> dotnet run
+
+Allocated Private Memory: 26.06 MB
+Physical Memory Usage: 38.70 MB
+DefaultSize: 9.190437316894531 MB*/
+
 
 
 

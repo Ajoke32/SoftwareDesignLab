@@ -25,7 +25,7 @@ namespace lab5.Composite.Interfaces
 		public ITagBuilder SetNode(LightElementNode node);
 		public string TagToString();
 		
-		public ITagBuilder SetIntention();
+		public ITagBuilder SetIdent();
 		
 		public ITagBuilder SetSlash();
 	}

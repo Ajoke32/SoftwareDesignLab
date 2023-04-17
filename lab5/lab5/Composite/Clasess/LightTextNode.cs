@@ -12,7 +12,7 @@ namespace lab5.Composite.Clasess
         protected string Text;
         public override ViewType ViewType { get; }
 
-        public int Intend { get; set; } = 0;
+        public int Ident { get; set; } = 0;
 
         public LightTextNode(string text)
         {

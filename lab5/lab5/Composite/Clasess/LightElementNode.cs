@@ -23,7 +23,7 @@ namespace lab5.Composite.Clasess
 	{
 		public Dictionary<string, string> Attributes { get; protected set; }
 
-		public string? Name { get; protected set; }
+		public string Name { get; protected set; }
 
 		public ClosureType ClosureType { get; protected set; }
 
@@ -74,7 +74,7 @@ namespace lab5.Composite.Clasess
 				Nodes.Add(node);
 				node.Parent = this;
 			}
-		}
+		} 
 
 
 		public override string Display()
@@ -84,7 +84,7 @@ namespace lab5.Composite.Clasess
 			if (ClosureType == ClosureType.Single)
 			{
 				return _tagBuilder.SetNode(this)
-				.SetIntention()
+				.SetIdent()
 				.SetOpenBracket()
 				.SetAttributes()
 				.SetSlash()
@@ -93,12 +93,12 @@ namespace lab5.Composite.Clasess
 			}
 
 			return _tagBuilder.SetNode(this)
-				.SetIntention()
+				.SetIdent()
 				.SetOpenBracket()
 				.SetAttributes()
 				.SetCloseBracket()
 				.SetChilds()
-				.SetIntention()
+				.SetIdent()
 				.SetCloseBrackets()
 				.TagToString();
 		}

@@ -13,7 +13,6 @@ namespace lab5.Composite.Clasess
 	{
 		private LightElementNode _node;
 
-
 		private StringBuilder _strBuilder;
 		public LightELementBuilder()
 		{
@@ -21,7 +20,7 @@ namespace lab5.Composite.Clasess
 			_node = new LightElementNode();
 		}
 
-		public ITagBuilder SetIntention()
+		public ITagBuilder SetIdent()
 		{
 			
 			if (_node.Parent != null&&(_node.InnerHtml()!=""||_strBuilder.ToString()==$""))
@@ -62,6 +61,7 @@ namespace lab5.Composite.Clasess
 		{
 			foreach (var node in _node.Nodes)
 			{
+				//_strBuilder.Append(node.Display());
 				_strBuilder.Append("\n" + node.Display() + "\n");
 			}
 			return this;
@@ -88,6 +88,7 @@ namespace lab5.Composite.Clasess
 		{
 			var stringBuilder = _strBuilder;
 			Reset();
+			//return stringBuilder.ToString()+"\n";
 			return stringBuilder.ToString();
 		}
 
