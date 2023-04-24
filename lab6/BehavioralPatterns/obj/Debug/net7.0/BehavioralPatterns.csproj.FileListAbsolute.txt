@@ -1,0 +1,15 @@
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\bin\Debug\net7.0\BehavioralPatterns.exe
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\bin\Debug\net7.0\BehavioralPatterns.deps.json
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\bin\Debug\net7.0\BehavioralPatterns.runtimeconfig.json
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\bin\Debug\net7.0\BehavioralPatterns.dll
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\bin\Debug\net7.0\BehavioralPatterns.pdb
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.csproj.AssemblyReference.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.AssemblyInfoInputs.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.AssemblyInfo.cs
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.csproj.CoreCompileInputs.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.dll
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\refint\BehavioralPatterns.dll
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.pdb
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\BehavioralPatterns.genruntimeconfig.cache
+C:\Users\bekke\source\repos\SoftwareDesignLab\lab6\BehavioralPatterns\obj\Debug\net7.0\ref\BehavioralPatterns.dll
