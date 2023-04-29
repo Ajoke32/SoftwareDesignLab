@@ -5,29 +5,29 @@ using BehavioralPatterns.ChainOfResponsibility;
 using BehavioralPatterns.ChainOfResponsibility.Handlers;
 using BehavioralPatterns.Mediator.Classes;
 
-// var supportService = new SupportService();
+var supportService = new SupportService();
 
-// AppState.SetService(supportService);
+AppState.SetService(supportService);
 
-// supportService.UseHandler(next=>context=>
-// {
-// 	System.Console.WriteLine(context.Menu);
-// 	context.Request = Console.ReadLine();
-// 	next(context);
-// });
-// supportService.RegisterSupportService<ErrorrHandler>()
-// 	.RegisterSupportService<AccountInfoHandler>()
-// 	.RegisterSupportService<ChangePasswordHandler>()
-// 	.RegisterSupportService<StateHandler>()
-// 	.RegisterSupportService<AccountMoneyHandler>();
-// supportService.UseHandler(next=>context=>
-// {
-// 	if(context.RequestToInt()==3)
-// 	{
-// 		System.Console.WriteLine(DateTime.Now);
-// 	}
-// 	next(context);
-// });
+supportService.UseHandler(next=>context=>
+{
+	System.Console.WriteLine(context.Menu);
+	context.Request = Console.ReadLine();
+	next(context);
+});
+supportService.RegisterSupportService<ErrorrHandler>()
+	.RegisterSupportService<AccountInfoHandler>()
+	.RegisterSupportService<ChangePasswordHandler>()
+	.RegisterSupportService<StateHandler>()
+	.RegisterSupportService<AccountMoneyHandler>();
+supportService.UseHandler(next=>context=>
+{
+	if(context.RequestToInt()==3)
+	{
+		System.Console.WriteLine(DateTime.Now);
+	}
+	next(context);
+});
 // Можна впихнути в кінець handler, який запитає чи потрбіно повернутися до меню ще раз, а не завершувати програму
 // Але відповідно до завдання потрібно знайти потрібно Handler та завершити 
 
@@ -49,18 +49,18 @@ using BehavioralPatterns.Mediator.Classes;
 // 	}
 // });
 
-// supportService.Start();
+supportService.Start();
 
 
-var cc = new CommandCentre();
-var ai = new Aircraft[]{new Aircraft("A1",cc),new Aircraft("A2",cc),new Aircraft("A3",cc)};
-var rw =  new  Runway[]{new Runway(cc){Id=1},new Runway(cc){Id=2},new Runway(cc){Id=3}};
-cc.SetUp(rw,ai);
+// var cc = new CommandCentre();
+// var ai = new Aircraft[]{new Aircraft("A1",cc),new Aircraft("A2",cc),new Aircraft("A3",cc)};
+// var rw =  new  Runway[]{new Runway(cc){Id=1},new Runway(cc){Id=2},new Runway(cc){Id=3}};
+// cc.SetUp(rw,ai);
 
-ai[0].LandRequest(1);
-ai[1].LandRequest(1);
-ai[0].TakeOff();
-ai[2].LandRequest(1);
+// ai[0].LandRequest(1);
+// ai[1].LandRequest(1);
+// ai[0].TakeOff();
+// ai[2].LandRequest(1);
 
 // rw[0].TechnicalWork();
 // ai[0].LandRequest(1);
