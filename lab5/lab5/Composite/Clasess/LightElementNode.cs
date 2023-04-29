@@ -23,7 +23,7 @@ namespace lab5.Composite.Clasess
 	{
 		public Dictionary<string, string> Attributes { get; protected set; }
 
-		public string Name { get; protected set; }
+		public override string Name { get;}
 
 		public ClosureType ClosureType { get; protected set; }
 
@@ -147,5 +147,10 @@ namespace lab5.Composite.Clasess
 		{
 			return new LightElementNode(this);
 		}
-	}
+
+        internal void AppendChild(object value)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -15,6 +15,8 @@ namespace lab5.Composite.Interfaces
 		
 		public LightElementNode Parent { get;set;}
 		
+		public string Name{get;}
+		
 	}
 	
 

@@ -7,30 +7,31 @@ using System.Threading.Tasks;
 
 namespace lab5.Composite.Clasess
 {
-    internal class LightTextNode : BaseNode
-    {
-        protected string Text;
-        public override ViewType ViewType { get; }
+	internal class LightTextNode : BaseNode
+	{
+		protected string Text;
+		public override ViewType ViewType { get; }
 
-        public int Ident { get; set; } = 0;
+		public override string  Name{get=>"text";}
+		public int Ident { get; set; } = 0;
 
-        public LightTextNode(string text)
-        {
-            Text = text;
-            ViewType = ViewType.String;
-        }
+		public LightTextNode(string text)
+		{
+			Text = text;
+			ViewType = ViewType.String;
+		}
 
-        public override string Display()
-        {
-            var s = new StringBuilder();
-            if (Parent != null)
-            {
-                for (int i = 0; i < Parent.Ident; i++)
-                {
-                    s.Append("\t");
-                }
-            }
-            return s.Append(Text).ToString();
-        }
-    }
+		public override string Display()
+		{
+			var s = new StringBuilder();
+			if (Parent != null)
+			{
+				for (int i = 0; i < Parent.Ident; i++)
+				{
+					s.Append("\t");
+				}
+			}
+			return s.Append(Text).ToString();
+		}
+	}
 }
