@@ -1,4 +1,5 @@
 ﻿using lab5.Composite.Interfaces;
+using lab5.Template;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace lab5.Composite.Clasess
 {
-	internal class LightTextNode : BaseNode
+	internal class LightTextNode : ELementLifecycle
 	{
 		protected string Text;
 		public override ViewType ViewType { get; }
@@ -32,6 +33,19 @@ namespace lab5.Composite.Clasess
 				}
 			}
 			return s.Append(Text).ToString();
+		}
+		public override void OnCreated()
+		{
+			System.Console.Write("Text node ");
+			base.OnCreated();
+			System.Console.WriteLine();
+		}
+		
+		public override void OnDeleted()
+		{
+			System.Console.Write("Text node ");
+			base.OnDeleted();
+			System.Console.WriteLine();
 		}
 	}
 }

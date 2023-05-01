@@ -1,4 +1,5 @@
 ﻿using lab5.Composite.Clasess;
+using lab5.Composite.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace lab5.Composite.Interfaces
 		public LightElementNode Parent { get;set;}
 		
 		public string Name{get;}
+		
+		public ElementState State{get;}
 		
 	}
 	

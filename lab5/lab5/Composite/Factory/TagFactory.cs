@@ -36,14 +36,18 @@ namespace lab5.Composite.Factory
 			{
 				var node = (LightElementNode)_node;
 				node.SetAttributes(attributes);
+				node.State.IsCreated= true;
 				return node;
 			}
+			 _node.State.IsCreated=true;
 			return _node??new LightElementNode();
 		}
 
 		public ILightNode CreateTextNode(string text)
 		{
-			return new LightTextNode(text);
+			var textNode = new LightTextNode(text);
+			textNode.State.IsCreated=true;
+			return textNode;
 		}
 	}
 }

@@ -1,4 +1,6 @@
 ﻿using lab5.Composite.Interfaces;
+using lab5.Composite.States;
+using lab5.Template;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,17 +21,21 @@ namespace lab5.Composite.Clasess
 		Single,
 		Patrial
 	}
-	internal class LightElementNode : BaseNode, INodeEditor, ICloneable
+	internal class LightElementNode : ELementLifecycle, INodeEditor, ICloneable
 	{
+		private string[] _availableAtributes = { "class", "style", "id" };
+		private string[] _availableStyles = { "color", "border", "display",
+		 "text-align", "justify-content", "align-items", "transform","background-color" };
+
 		public Dictionary<string, string> Attributes { get; protected set; }
 
-		public override string Name { get;}
+		public override string Name { get; }
 
 		public ClosureType ClosureType { get; protected set; }
 
 		public List<ILightNode> Nodes { get; protected set; }
 
-        public override ViewType ViewType {get;}
+		public override ViewType ViewType { get; }
 		public int Ident { get; set; } = 0;
 
 		public void SetAttributes(Dictionary<string, string> attributes)
@@ -73,14 +79,14 @@ namespace lab5.Composite.Clasess
 			{
 				Nodes.Add(node);
 				node.Parent = this;
+				node.State.IsInserted=true;
 			}
-		} 
+		}
 
 
 		public override string Display()
 		{
 			var _tagBuilder = new LightELementBuilder();
-
 			if (ClosureType == ClosureType.Single)
 			{
 				return _tagBuilder.SetNode(this)
@@ -114,6 +120,57 @@ namespace lab5.Composite.Clasess
 			return builder.ToString();
 		}
 
+
+		public override void OnStylesApplied()
+		{
+			bool error = false;
+			if (Attributes.ContainsKey("style"))
+			{
+				string style = Attributes["style"].Replace(" ", "");
+				string[] styles = style.Split(";");
+
+				foreach (var item in styles)
+				{
+					if(String.IsNullOrEmpty(item))
+					{
+						continue;
+					}
+					if (Array.IndexOf(_availableStyles, item.Substring(0,item.IndexOf(":"))) == -1)
+					{
+						error = true;
+					}
+				}
+			}
+			base.OnStylesApplied();
+			if (error)
+			{
+				System.Console.Write(" with error, check available styles {____}\n");
+				return;
+			}
+			System.Console.Write(" without error\n");
+		}
+
+		public override void OnDeleted()
+		{
+			this.CleanListeners();
+			base.OnDeleted();
+			System.Console.Write(" memory is freed up\n");
+		}
+
+		public override void OnCreated()
+		{
+			base.OnCreated();
+			foreach(var attr in Attributes.Keys)
+			{
+				if(Array.IndexOf(_availableAtributes,attr)==-1)
+				{
+					System.Console.WriteLine(" with error, check available attributes and naming conventions {____}");
+					return;
+				}
+			}
+			System.Console.WriteLine(" succesfully");
+		}
+
 		public string? OuterHtml()
 		{
 			return Display();
@@ -122,6 +179,7 @@ namespace lab5.Composite.Clasess
 		public void RemoveChild(ILightNode node)
 		{
 			Nodes.Remove(node);
+			node.State.IsRemoved=true;
 		}
 
 		public void ReplaceChild(ILightNode node, ILightNode replaceNode)
@@ -147,10 +205,5 @@ namespace lab5.Composite.Clasess
 		{
 			return new LightElementNode(this);
 		}
-
-        internal void AppendChild(object value)
-        {
-            throw new NotImplementedException();
-        }
-    }
+	}
 }

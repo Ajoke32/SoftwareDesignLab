@@ -9,5 +9,7 @@ namespace lab5.Observer
 		public void RemoveEventListener(Action<Event> listener);
 		
 		public void TriggerEvent(string eventName);
+		
+		public void CleanListeners();
 	}
 }
