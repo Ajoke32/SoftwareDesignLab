@@ -15,9 +15,9 @@
 //Examples.FlyWeight();
 
 
-// using lab5;
-// using lab5.Composite.Clasess;
-// using lab5.Composite.Factory;
+using lab5;
+using lab5.Composite.Clasess;
+using lab5.Composite.Factory;
 
 // var tagFactory = new TagFactory();
 // var node = (LightElementNode)tagFactory.CreateElement("div",new Dictionary<string, string>()
@@ -36,6 +36,7 @@
 // System.Console.WriteLine(node.Display());
 
 
+//Examples.Interator();
 
 
 

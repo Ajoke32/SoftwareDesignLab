@@ -7,6 +7,8 @@ using lab5.HeroComposite;
 using lab5.HeroComposite.Abstract;
 using lab5.HeroComposite.ArtefactContainers;
 using lab5.HeroComposite.Artefacts;
+using lab5.Iterator;
+using lab5.Iterator.Strategy;
 using lab5.Observer;
 using lab5.Proxy.Classes;
 using lab5.Proxy.Proxies;
@@ -184,7 +186,7 @@ namespace lab5
 			Process proc = Process.GetCurrentProcess();
 			Console.WriteLine($"Allocated Private Memory: {proc.PrivateMemorySize64.ToSmallestFullSize()}");
 			Console.WriteLine($"Physical Memory Usage: {proc.WorkingSet64.ToSmallestFullSize()}");
-			Console.WriteLine("DefaultSize: " + size2 / (1024.0 * 1024.0) + " MB"); 
+			Console.WriteLine("DefaultSize: " + size2 / (1024.0 * 1024.0) + " MB");
 
 			/*
 			Allocated Private Memory: 19.02 MB
@@ -207,10 +209,48 @@ namespace lab5
 			Physical Memory Usage: 38.70 MB
 			DefaultSize: 9.190437316894531 MB*/
 		}
-		
-		public static void  Template(ELementLifecycle element)
+
+		public static void Template(ELementLifecycle element)
 		{
-		    element.TemplateMethod();	
+			element.TemplateMethod();
+		}
+
+
+		public static void Interator()
+		{
+			var tagFactory = new TagFactory();
+			var root = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "root(1)" } });
+			var node = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "node(2)" } });
+			var node2 = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "node(3)" } });
+			node.AppendChild(tagFactory.CreateElement("p", new Dictionary<string, string>() { { "id", "child1ofNode(4)" } }));
+			node.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child(5)" } }));
+			node.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child3ofNode1(6)" } }));
+			node2.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child1ofNode2(7)" } }));
+			node2.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child2ofNode2(8)" } }));
+			root.AppendChild(node);
+			root.AppendChild(node2);
+
+			LightElementNode[] nodes = new LightElementNode[2]
+			{
+				root,
+				node
+			};
+
+
+			DepthFirstIterator dp = new DepthFirstIterator(root);
+			BreadthFirstIterator bp = new BreadthFirstIterator(root);
+			IteratorStrategy iterator = new IteratorStrategy();
+			iterator.SetEnumerator(bp);
+			foreach (LightElementNode nod in iterator)
+			{
+				System.Console.WriteLine(nod.Attributes["id"]); // must be 1,2,3,4,5,6,7,8
+			}
+			System.Console.WriteLine("\n-----------------------------------------------------------------------\n");
+			iterator.SetEnumerator(dp);
+			foreach (LightElementNode nod in iterator)
+			{
+				System.Console.WriteLine(nod.Attributes["id"]); // must be 1,2,4,5,6,3,7,8
+			}
 		}
 	}
 }

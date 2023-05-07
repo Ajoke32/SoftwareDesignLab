@@ -14,6 +14,12 @@ namespace lab5.Composite.Clasess
 		{
 			return node.ClosureType==ClosureType.Patrial;
 		}
+
+		public static bool HasChilds(this LightElementNode node)
+		{
+			return node.Nodes.Any();
+		}
+	
 	
 	}
 }
