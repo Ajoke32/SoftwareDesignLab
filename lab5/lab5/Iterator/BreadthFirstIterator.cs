@@ -7,8 +7,8 @@ namespace lab5.Iterator
 {
 	internal class BreadthFirstIterator : IEnumerator
 	{
-		private Queue<LightElementNode> _queue = new Queue<LightElementNode>();
-		private LightElementNode _node = new LightElementNode("div",ClosureType.Patrial,ViewType.Block);
+		private readonly Queue<LightElementNode> _queue = new Queue<LightElementNode>();
+		private readonly LightElementNode _node = new LightElementNode("root",ClosureType.Patrial,ViewType.Block);
 
 		private LightElementNode _current;
 
@@ -17,7 +17,7 @@ namespace lab5.Iterator
 			_node.AppendChild(rootNode);
 			_current=_node;
 		}
-		public BreadthFirstIterator(LightElementNode[] nodes)
+		public BreadthFirstIterator(ILightNode[] nodes)
 		{
 			foreach(var node in nodes)
 			{
@@ -40,9 +40,13 @@ namespace lab5.Iterator
 				_current = _current.NextElementSibling;
 				return true;
 			}
-			//умова виходу
+			
 			if (_queue.Count == 0)
 			{
+				foreach (var node in _node.Nodes)
+				{
+					node.RemoveParent();
+				}
 				return false;
 			}
 			if (_current.NextElementSibling == null)

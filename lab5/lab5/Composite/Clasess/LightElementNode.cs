@@ -23,8 +23,8 @@ namespace lab5.Composite.Clasess
     }
     internal class LightElementNode : ELementLifecycle, INodeEditor, ICloneable
     {
-        private string[] _availableAtributes = { "class", "style", "id" };
-        private string[] _availableStyles = { "color", "border", "display",
+        private readonly string[] _availableAtributes = { "class", "style", "id" };
+        private readonly string[] _availableStyles = { "color", "border", "display",
          "text-align", "justify-content", "align-items", "transform","background-color" };
 
         public Dictionary<string, string> Attributes { get; protected set; }
@@ -79,7 +79,7 @@ namespace lab5.Composite.Clasess
             {
                 Nodes.Add(node);
                 node.Parent = this;
-
+                
                 if (node is LightElementNode)
                 {
                     var inserted = (LightElementNode)node;
@@ -107,10 +107,10 @@ namespace lab5.Composite.Clasess
 
         public override string Display()
         {
-            var _tagBuilder = new LightELementBuilder();
+            var tagBuilder = new LightELementBuilder();
             if (ClosureType == ClosureType.Single)
             {
-                return _tagBuilder.SetNode(this)
+                return tagBuilder.SetNode(this)
                 .SetIdent()
                 .SetOpenBracket()
                 .SetAttributes()
@@ -119,7 +119,7 @@ namespace lab5.Composite.Clasess
                 .TagToString();
             }
 
-            return _tagBuilder.SetNode(this)
+            return tagBuilder.SetNode(this)
                 .SetIdent()
                 .SetOpenBracket()
                 .SetAttributes()
@@ -127,7 +127,7 @@ namespace lab5.Composite.Clasess
                 .SetChilds()
                 .SetIdent()
                 .SetCloseBrackets()
-                .TagToString();
+                .TagToString();;
         }
 
         public string InnerHtml()
@@ -165,17 +165,17 @@ namespace lab5.Composite.Clasess
             base.OnStylesApplied();
             if (error)
             {
-                System.Console.Write(" with error, check available styles {____}\n");
+                Console.Write(" with error, check available styles {____}\n");
                 return;
             }
-            System.Console.Write(" without error\n");
+            Console.Write(" without error\n");
         }
 
         public override void OnDeleted()
         {
-            this.CleanListeners();
+            CleanListeners();
             base.OnDeleted();
-            System.Console.Write(" memory is freed up\n");
+            Console.Write(" memory is freed up\n");
         }
 
         public override void OnCreated()
@@ -185,11 +185,11 @@ namespace lab5.Composite.Clasess
             {
                 if (Array.IndexOf(_availableAtributes, attr) == -1)
                 {
-                    System.Console.WriteLine(" with error, check available attributes and naming conventions {____}");
+                    Console.WriteLine(" with error, check available attributes and naming conventions {____}");
                     return;
                 }
             }
-            System.Console.WriteLine(" succesfully");
+            Console.WriteLine(" successfully");
         }
 
         public string? OuterHtml()

@@ -41,22 +41,22 @@ namespace lab5.Template
 		}
 		public virtual void OnCreated()
 		{
-			System.Console.Write("Element created");
+			Console.Write("Element created");
 		}
 
 		public virtual void OnDeleted()
 		{
-			System.Console.Write("Element deleted from DOM");
+			Console.Write("Element deleted from DOM");
 		}
 
 		public virtual void OnStylesApplied()
 		{
-			System.Console.Write("Styles was be applied");
+			Console.Write("Styles was be applied");
 		}
 
 		public virtual void OnInserted()
 		{
-			System.Console.WriteLine($"Element inserted to tag {this.Parent.Name}");
+			Console.WriteLine($"Element inserted to tag {this.Parent.Name}");
 		}
 			
 		public virtual void Hook(){}

@@ -13,13 +13,15 @@ namespace lab5.Composite.Interfaces
 		public string Display();
 
 		public ViewType ViewType { get; }
-		
-		public LightElementNode Parent { get;set;}
-		
+
+		public LightElementNode? Parent { get; set; }
+
 		public string Name{get;}
 		
 		public ElementState State{get;}
-		
+
+		public void RemoveParent();
+
 	}
 	
 

@@ -7,13 +7,13 @@ namespace lab5.Composite.Clasess
 {
 	internal abstract class BaseNode : ILightNode, IEventListener
 	{
-		protected LightElementNode? _parent = null;
+		private LightElementNode? _parent = null;
 
-		public LightElementNode? NextElementSibling {get;set;}=null;
+		public LightElementNode? NextElementSibling {get; protected set;}=null;
 		
 		public abstract ViewType ViewType { get; }
-		private List<Action<Event>> _listeners = new List<Action<Event>>(); // observers
-		private List<Event> _events = new List<Event>();
+		private readonly List<Action<Event>> _listeners = new List<Action<Event>>(); // observers
+		private readonly List<Event> _events = new List<Event>();
 		public ElementState State { get; private set; } = new ElementState();
 		public abstract string Name { get; }
 
@@ -22,13 +22,17 @@ namespace lab5.Composite.Clasess
 			get => _parent;
 			set
 			{
-				if (value != null && value.HaveChild(this))
+				if (value!=null&&value.HaveChild(this))
 				{
 					_parent = value;
 				}
 			}
 		}
 
+		public void RemoveParent()
+		{
+			_parent = null;
+		}
 		public abstract string Display();
 
 		public void AddEventListener(string eventName, Action<Event> listener)

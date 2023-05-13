@@ -15,9 +15,12 @@
 //Examples.FlyWeight();
 
 
+using System.Threading.Channels;
 using lab5;
+using lab5.Command;
 using lab5.Composite.Clasess;
 using lab5.Composite.Factory;
+using lab5.Composite.Interfaces;
 
 // var tagFactory = new TagFactory();
 // var node = (LightElementNode)tagFactory.CreateElement("div",new Dictionary<string, string>()
@@ -38,6 +41,20 @@ using lab5.Composite.Factory;
 
 //Examples.Interator();
 
+var nodes = new List<ILightNode>()
+{
+    new LightElementNode("div", ClosureType.Patrial, ViewType.Block),
+    new LightElementNode("div", ClosureType.Patrial, ViewType.Block),
+    new LightElementNode("p", ClosureType.Patrial, ViewType.Block),
+    new LightElementNode("div", ClosureType.Patrial, ViewType.Block),
+
+};
+var ed = new Editor(nodes);
+foreach (var node in nodes)
+{
+    Console.WriteLine(node.Display());
+}
+ed.Start();
 
 
 
