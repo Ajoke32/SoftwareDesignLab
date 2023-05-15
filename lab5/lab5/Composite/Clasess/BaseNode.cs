@@ -12,9 +12,11 @@ namespace lab5.Composite.Clasess
 		public LightElementNode? NextElementSibling {get; protected set;}=null;
 		
 		public abstract ViewType ViewType { get; }
+		
 		private readonly List<Action<Event>> _listeners = new List<Action<Event>>(); // observers
+		
 		private readonly List<Event> _events = new List<Event>();
-		public ElementState State { get; private set; } = new ElementState();
+		public ElementState State { get;} = new ElementState();
 		public abstract string Name { get; }
 
 		public LightElementNode? Parent

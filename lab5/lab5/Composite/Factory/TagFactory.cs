@@ -32,21 +32,26 @@ namespace lab5.Composite.Factory
 				default: throw new Exception("Tag not exist");
 				 
 			}
-			if(attributes!= null&&_node!=null)
+			if(attributes!= null)
 			{
 				var node = (LightElementNode)_node;
 				node.SetAttributes(attributes);
 				node.State.IsCreated= true;
 				return node;
 			}
-			 _node.State.IsCreated=true;
-			return _node??new LightElementNode();
+			
+			_node.State.IsCreated=true;
+			 
+			return _node;
 		}
 
 		public ILightNode CreateTextNode(string text)
 		{
-			var textNode = new LightTextNode(text);
-			textNode.State.IsCreated=true;
+			var textNode = new LightTextNode(text)
+			{
+				State = {IsCreated = true}
+			};
+			
 			return textNode;
 		}
 	}

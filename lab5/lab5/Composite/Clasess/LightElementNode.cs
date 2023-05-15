@@ -1,11 +1,7 @@
 ﻿using lab5.Composite.Interfaces;
-using lab5.Composite.States;
 using lab5.Template;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace lab5.Composite.Clasess
 {
@@ -27,13 +23,13 @@ namespace lab5.Composite.Clasess
         private readonly string[] _availableStyles = { "color", "border", "display",
          "text-align", "justify-content", "align-items", "transform","background-color" };
 
-        public Dictionary<string, string> Attributes { get; protected set; }
+        public Dictionary<string, string> Attributes { get; private set; }
 
         public override string Name { get; }
 
-        public ClosureType ClosureType { get; protected set; }
+        public ClosureType ClosureType { get; }
 
-        public List<ILightNode> Nodes { get; protected set; }
+        public List<ILightNode> Nodes { get; }
 
         public override ViewType ViewType { get; }
         public int Ident { get; set; } = 0;
@@ -142,7 +138,7 @@ namespace lab5.Composite.Clasess
         }
 
 
-        public override void OnStylesApplied()
+        protected override void OnStylesApplied()
         {
             bool error = false;
             if (Attributes.ContainsKey("style"))
@@ -171,14 +167,14 @@ namespace lab5.Composite.Clasess
             Console.Write(" without error\n");
         }
 
-        public override void OnDeleted()
+        protected override void OnDeleted()
         {
             CleanListeners();
             base.OnDeleted();
             Console.Write(" memory is freed up\n");
         }
 
-        public override void OnCreated()
+        protected override void OnCreated()
         {
             base.OnCreated();
             foreach (var attr in Attributes.Keys)

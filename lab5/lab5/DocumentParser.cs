@@ -9,10 +9,10 @@ namespace lab5
 	public class DocumentParser : IDocumentParser
 	{
 		private ILightNode _node;
-		private string _path;
+		private readonly string _path;
 
-		private TagFactory _tagBuilder;
-		private StringBuilder _strBuilder = new StringBuilder();
+		private readonly TagFactory _tagBuilder;
+		private readonly StringBuilder _strBuilder = new StringBuilder();
 		public DocumentParser(string path)
 		{
 			_path = path;

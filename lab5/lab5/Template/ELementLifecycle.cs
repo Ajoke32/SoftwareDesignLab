@@ -1,5 +1,5 @@
-using System;
 using lab5.Composite.Clasess;
+
 
 namespace lab5.Template
 {
@@ -10,7 +10,7 @@ namespace lab5.Template
 		{
 			if(!ValidateState())
 			{
-				System.Console.WriteLine("tag was be deleted or not exist");
+				Console.WriteLine("tag was be deleted or not exist");
 				return;
 			}
 			if (State.IsCreated)
@@ -21,7 +21,7 @@ namespace lab5.Template
 			{
 				OnStylesApplied();
 			}
-			if (this.Parent != null)
+			if (Parent != null)
 			{
 				OnInserted();
 			}
@@ -30,33 +30,35 @@ namespace lab5.Template
 				OnDeleted();
 			}
 		}
-		protected bool IsStylesSupported()
+		
+		private bool IsStylesSupported()
 		{
 			return this is LightElementNode;
 		}
-		
-		protected bool ValidateState()
+
+		private bool ValidateState()
 		{
-			return this.State!=null;
+			return State!=null;
 		}
-		public virtual void OnCreated()
+
+		protected virtual void OnCreated()
 		{
 			Console.Write("Element created");
 		}
 
-		public virtual void OnDeleted()
+		protected virtual void OnDeleted()
 		{
 			Console.Write("Element deleted from DOM");
 		}
 
-		public virtual void OnStylesApplied()
+		protected virtual void OnStylesApplied()
 		{
 			Console.Write("Styles was be applied");
 		}
 
-		public virtual void OnInserted()
+		protected virtual void OnInserted()
 		{
-			Console.WriteLine($"Element inserted to tag {this.Parent.Name}");
+			Console.WriteLine($"Element inserted to tag {Parent?.Name}");
 		}
 			
 		public virtual void Hook(){}

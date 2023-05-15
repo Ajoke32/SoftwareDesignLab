@@ -34,14 +34,15 @@ namespace lab5.Composite.Clasess
 			}
 			return s.Append(Text).ToString();
 		}
-		public override void OnCreated()
+
+		protected override void OnCreated()
 		{
 			System.Console.Write("Text node ");
 			base.OnCreated();
 			System.Console.WriteLine();
 		}
-		
-		public override void OnDeleted()
+
+		protected override void OnDeleted()
 		{
 			System.Console.Write("Text node ");
 			base.OnDeleted();
