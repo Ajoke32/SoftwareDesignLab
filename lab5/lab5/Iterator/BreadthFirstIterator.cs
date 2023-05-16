@@ -8,6 +8,7 @@ namespace lab5.Iterator
 	internal class BreadthFirstIterator : IEnumerator
 	{
 		private readonly Queue<LightElementNode> _queue = new Queue<LightElementNode>();
+		
 		private readonly LightElementNode _node = new LightElementNode("root",ClosureType.Patrial,ViewType.Block);
 
 		private LightElementNode _current;

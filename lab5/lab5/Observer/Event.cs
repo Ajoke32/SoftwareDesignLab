@@ -6,10 +6,10 @@ namespace lab5.Observer
 	internal class Event
 	{
 		
-		public ILightNode Target{get;private set;}
+		public ILightNode Target {get;private set;}
 
 		public string Type {get;private set;}
-		public Event(string type,ILightNode target=null)
+		public Event(string type,ILightNode target)
 		{
 			Type = type;
 			Target = target;

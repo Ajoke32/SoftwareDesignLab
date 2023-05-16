@@ -9,6 +9,7 @@ internal class TextToHtmlConverter
     
     public string ConvertFrom { get; set; }
     public string SavePath { get; set; }
+    
 
     private Dictionary<ErrorLevels, List<CustomError>>? _errors;
     public Dictionary<ErrorLevels, List<CustomError>>? Errors
@@ -23,12 +24,17 @@ internal class TextToHtmlConverter
         _state.SetContext(this);
     }
     
-    public void Handle(State state)
+    public void Convert()
     {
-        _state = state;
         _state.Handle();
     }
-    
+
+    public void ChangeState(State state)
+    {
+        _state = state;
+        _state.SetContext(this);
+        _state.Handle();
+    }
  
     
 }

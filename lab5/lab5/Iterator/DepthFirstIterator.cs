@@ -9,9 +9,10 @@ namespace lab5.Iterator
 	{
 
 		private Stack<LightElementNode> _stack;
+		
 		private LightElementNode _current;
 
-		private LightElementNode _root = new LightElementNode("div", ClosureType.Patrial, ViewType.Block);
+		private readonly LightElementNode _root = new LightElementNode("div", ClosureType.Patrial, ViewType.Block);
 
 		public DepthFirstIterator(LightElementNode root)
 		{

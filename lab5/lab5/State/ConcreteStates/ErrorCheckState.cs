@@ -10,11 +10,25 @@ internal class ErrorCheckState:State
     {
         Console.WriteLine("Checking for errors...");
         
-        if (IsFileEmpty(Context.ConvertFrom))
+        if (!File.Exists(Context.ConvertFrom))
         {
-            Console.WriteLine("Convert content is empty");
+            Context.Errors?[ErrorLevels.Critical].Add(new CustomError()
+            {
+                Code = 205,
+                Message = "Cannot start converting, convert file not exist",
+                ErrorLevel = ErrorLevels.Critical
+            });
+        }else if(IsFileEmpty(Context.ConvertFrom))
+        {
+            Context.Errors?[ErrorLevels.Low].Add(new CustomError()
+            {
+                Code = 205,
+                Message = "Convert file is empty",
+                ErrorLevel = ErrorLevels.Low
+            });
         }
-
+        HandlePathError();
+        HandleFileExistingError();
         if (new FileInfo(Context.SavePath).Extension != ".txt")
         {
             Context.Errors?[ErrorLevels.Critical].Add(new CustomError()
@@ -24,10 +38,7 @@ internal class ErrorCheckState:State
                 ErrorLevel = ErrorLevels.Critical
             });
         }
-        
-        HandlePathError();
-        HandleFileExistingError();
-        
+
         if (Context.Errors?.Count > 0)
         {
             if (GetErrorsReport())
@@ -36,10 +47,8 @@ internal class ErrorCheckState:State
             }
         }
 
-        Console.WriteLine("Ready to upload!");
-        var uploadState = new UploadState();
-        uploadState.SetDocumentParser(new FlyDocumentParser(Context.ConvertFrom));
-        Context.Handle(uploadState);
+        Console.WriteLine("Ready to upload!\n");
+        Context.ChangeState(new UploadState(new FlyDocumentParser(Context.ConvertFrom)));
     }
 
 
@@ -55,7 +64,7 @@ internal class ErrorCheckState:State
             {
                 criticalErrors = true;
             }
-            Console.WriteLine($"{e.Message}\nStatus code: {e.Code}\nError level {e.ErrorLevel}");
+            ConsoleColorChanger.ChangeColor($"{e.Message}\nStatus code: {e.Code}\nError level: {e.ErrorLevel}\n",e.ErrorLevel);
         }
 
         return criticalErrors;
@@ -63,7 +72,7 @@ internal class ErrorCheckState:State
 
     private bool IsFileEmpty(string filePath)
     {
-        if (new FileInfo(filePath).Length >= 0) return false;
+        if (new FileInfo(filePath).Length == 0) return true;
         
         Context.Errors?[ErrorLevels.Medium].Add(new CustomError()
         {
@@ -71,7 +80,7 @@ internal class ErrorCheckState:State
             Message = "File is empty",
             ErrorLevel = ErrorLevels.Medium
         });
-        return true;
+        return false;
 
     }
     private void HandlePathError()
@@ -92,10 +101,13 @@ internal class ErrorCheckState:State
         if (!File.Exists(Context.SavePath))
         {
             File.Create(_defaultPath);
+        }
+        else
+        {
             Context.Errors?[ErrorLevels.Medium].Add(new CustomError()
             {
                 Code = 100,
-                Message = "The file already exists, it will be overwritten",
+                Message = "The save file already exists, it will be overwritten",
                 ErrorLevel = ErrorLevels.Medium
             });
         }

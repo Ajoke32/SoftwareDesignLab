@@ -25,7 +25,6 @@ namespace lab5.Command
 
 		public override void Undo()
 		{
-			
 			_editor.Nodes.Insert(_removedIndexes.Pop(),this.GetLastHistoryNode());
 		}
 	}

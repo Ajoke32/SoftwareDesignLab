@@ -12,9 +12,6 @@ namespace lab5.Command
 		}
 		public abstract void Execute();
 		
-		public virtual void Undo()
-		{
-			
-		}
+		public virtual void Undo(){ }
 	}
 }

@@ -16,17 +16,17 @@ internal class InitialState:State
         
         Console.WriteLine("Initialization of the load...");
         Context.Errors = InitErrors();
-        Console.WriteLine("Initialization completed successfully");
-
+        Console.WriteLine("Initialization completed successfully\n");
+        Context.ChangeState(new ErrorCheckState());
     }
     
     private Dictionary<ErrorLevels, List<CustomError>> InitErrors()
     {
         return new Dictionary<ErrorLevels, List<CustomError>>()
         {
-            {ErrorLevels.Critical,new List<CustomError>()},
             {ErrorLevels.Medium,new List<CustomError>()},
             {ErrorLevels.Low,new List<CustomError>()},
+            {ErrorLevels.Critical,new List<CustomError>()}
         };
     }
 }

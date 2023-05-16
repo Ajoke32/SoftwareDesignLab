@@ -1,8 +1,10 @@
 using System;
 using System.Diagnostics;
+using lab5.Command;
 using lab5.Composite.Clasess;
 using lab5.Composite.Composits;
 using lab5.Composite.Factory;
+using lab5.Composite.Interfaces;
 using lab5.HeroComposite;
 using lab5.HeroComposite.Abstract;
 using lab5.HeroComposite.ArtefactContainers;
@@ -12,6 +14,7 @@ using lab5.Iterator.Strategy;
 using lab5.Observer;
 using lab5.Proxy.Classes;
 using lab5.Proxy.Proxies;
+using lab5.State;
 using lab5.Template;
 
 namespace lab5
@@ -26,23 +29,28 @@ namespace lab5
 
 			Action<Event> act = (e) =>
 			{
-				System.Console.WriteLine("type is " + e.Type);
+				Console.WriteLine("type is " + e.Type);
 			};
 			node.AddEventListener("click", (e) =>
 			{
 				if (e.Target.Name == "div")
 				{
-					System.Console.WriteLine("it`s div");
+					Console.WriteLine("it`s div");
 				}
 				else
 				{
-					System.Console.WriteLine($"tagName is {e.Target.Name}");
+					Console.WriteLine($"tagName is {e.Target.Name}");
 				}
+			});
+			node2.AddEventListener("mouseup", (e) =>
+			{
+				Console.WriteLine($"type: {e.Type}, node: {e.Target.Name}");
 			});
 			node.AddEventListener("click", act);
 			node.TriggerEvent("click");
 			node.RemoveEventListener(act);
 			node.TriggerEvent("click");
+			node2.TriggerEvent("mouseup");
 		}
 
 		public static void LightHTML()
@@ -219,23 +227,25 @@ namespace lab5
 		public static void Interator()
 		{
 			var tagFactory = new TagFactory();
-			var root = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "root(1)" } });
-			var node = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "node(2)" } });
-			var node2 = (LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "node(3)" } });
-			node.AppendChild(tagFactory.CreateElement("p", new Dictionary<string, string>() { { "id", "child1ofNode(4)" } }));
-			node.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child(5)" } }));
-			node.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child3ofNode1(6)" } }));
-			node2.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child1ofNode2(7)" } }));
-			node2.AppendChild((LightElementNode)tagFactory.CreateElement("div", new Dictionary<string, string>() { { "id", "child2ofNode2(8)" } }));
+			var root = (LightElementNode)tagFactory.CreateElement("div",
+				new Dictionary<string, string>() { { "id", "root(1)" } });
+			var node = (LightElementNode)tagFactory.CreateElement("div",
+				new Dictionary<string, string>() { { "id", "node(2)" } });
+			var node2 = (LightElementNode)tagFactory.CreateElement("div",
+				new Dictionary<string, string>() { { "id", "node(3)" } });
+			node.AppendChild(tagFactory.CreateElement("p",
+				new Dictionary<string, string>() { { "id", "child1ofNode(4)" } }));
+			node.AppendChild((LightElementNode)tagFactory.CreateElement("div",
+				new Dictionary<string, string>() { { "id", "child(5)" } }));
+			node.AppendChild((LightElementNode)tagFactory.CreateElement("div",
+				new Dictionary<string, string>() { { "id", "child3ofNode1(6)" } }));
+			node2.AppendChild((LightElementNode)tagFactory.CreateElement("div",
+				new Dictionary<string, string>() { { "id", "child1ofNode2(7)" } }));
+			node2.AppendChild((LightElementNode)tagFactory.CreateElement("div",
+				new Dictionary<string, string>() { { "id", "child2ofNode2(8)" } }));
 			root.AppendChild(node);
 			root.AppendChild(node2);
-
-			LightElementNode[] nodes = new LightElementNode[2]
-			{
-				root,
-				node
-			};
-
+			
 
 			DepthFirstIterator dp = new DepthFirstIterator(root);
 			BreadthFirstIterator bp = new BreadthFirstIterator(root);
@@ -251,6 +261,31 @@ namespace lab5
 			{
 				System.Console.WriteLine(nod.Attributes["id"]); // must be 1,2,4,5,6,3,7,8
 			}
+		}
+
+		public static void StateFeature()
+		{
+			var converter = new TextToHtmlConverter();
+			converter.ConvertFrom = Directory.GetCurrentDirectory() + "//State//TextToConvert.txt";
+			converter.Convert();
+		}
+
+		public static void Command()
+		{
+			var nodes = new List<ILightNode>()
+			{
+				new LightElementNode("div", ClosureType.Patrial, ViewType.Block),
+				new LightElementNode("div", ClosureType.Patrial, ViewType.Block),
+				new LightElementNode("p", ClosureType.Patrial, ViewType.Block),
+				new LightElementNode("div", ClosureType.Patrial, ViewType.Block),
+
+			};
+			var ed = new Editor(nodes);
+			foreach (var node in nodes)
+			{
+				Console.WriteLine(node.Display());
+			}
+			ed.Start();
 		}
 	}
 }
